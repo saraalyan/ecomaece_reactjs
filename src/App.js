@@ -1,24 +1,40 @@
-import logo from './logo.svg';
 import './App.css';
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+import Navbb from './component/navbb.js';
+import Login from './pages/login.js';
+import Register from './pages/register.js';
+import Movies from './pages/Movies.js';
+import Pro from './pages/pro.js';
+import Home from './pages/home.js';
+import NotFound from './pages/NotFound.js';
+import moviesdetails from './pages/moviesdetails.js';
+import ProductDetails from'./pages/ProductDetails.js';
+import Products from './pages/products.js';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <BrowserRouter>
+      <Navbb />
+
+        <Switch>
+        <Route component={Home} path="/" exact />
+          <Route component={Login} path="/login" exact />
+           <Route component={Register} path="/register" exact /> 
+           <Route component={Pro} path="/Portfolio" exact /> 
+           <Route component={Products} path="/Products" exact /> 
+
+           <Route component={Movies} path="/Movies" exact /> 
+           <Route component={ProductDetails} path="/ProductDetails/:id" exact /> 
+
+           <Route component={moviesdetails} path="/moviesdetails/:id" exact /> 
+           
+           <Route component={NotFound} path="*" exact /> 
+
+
+        </Switch>
+      </BrowserRouter>
+    </>
   );
 }
 
