@@ -10,28 +10,24 @@ import NotFound from './pages/NotFound.js';
 import moviesdetails from './pages/moviesdetails.js';
 import ProductDetails from'./pages/ProductDetails.js';
 import Products from './pages/products.js';
+import ProductsByCategory from './pages/ProductsByCategory.js';
 
 function App() {
   return (
     <>
       <BrowserRouter>
-      <Navbb />
-
+        <Navbb />
         <Switch>
-        <Route component={Home} path="/" exact />
+          <Route component={Home} path="/" exact />
           <Route component={Login} path="/login" exact />
-           <Route component={Register} path="/register" exact /> 
-           <Route component={Pro} path="/Portfolio" exact /> 
-           <Route component={Products} path="/Products" exact /> 
-
-           <Route component={Movies} path="/Movies" exact /> 
-           <Route component={ProductDetails} path="/ProductDetails/:id" exact /> 
-
-           <Route component={moviesdetails} path="/moviesdetails/:id" exact /> 
-           
-           <Route component={NotFound} path="*" exact /> 
-
-
+          <Route component={Register} path="/register" exact /> 
+          <Route component={Pro} path="/Portfolio" exact /> 
+          <Route component={Products} path="/Products" exact /> 
+          <Route path="/category/:category" component={ProductsByCategory} />
+          <Route component={Movies} path="/Movies" exact /> 
+          <Route component={ProductDetails} path="/ProductDetails/:id" exact /> 
+          <Route component={moviesdetails} path="/moviesdetails/:id" exact /> 
+          <Route component={NotFound} path="*" exact /> 
         </Switch>
       </BrowserRouter>
     </>
