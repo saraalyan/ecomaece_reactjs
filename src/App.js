@@ -1,16 +1,16 @@
 import './App.css';
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import Navbb from './component/navbb.js';
-import Login from './pages/login.js';
-import Register from './pages/register.js';
-import Movies from './pages/Movies.js';
-import Pro from './pages/pro.js';
-import Home from './pages/home.js';
+import Navbb from './component/navbar/navbb.js';
+import Login from './pages/login_and_register/Login.js';
+import Register from './pages/login_and_register/register.js';
+import Movies from './pages/movies/Movies.js';
+import Pro from './pages/portofolio/pro.js';
+import Home from './pages/my home/home.js';
 import NotFound from './pages/NotFound.js';
-import moviesdetails from './pages/moviesdetails.js';
-import ProductDetails from'./pages/ProductDetails.js';
-import Products from './pages/products.js';
-import ProductsByCategory from './pages/ProductsByCategory.js';
+import moviesdetails from './pages/movies/moviesdetails.js';
+import ProductDetails from'./pages/ecomearce_product/ProductDetails.js';
+import Products from './pages/ecomearce_product/products.js';
+import ProductsByCategory from './pages/ecomearce_product/ProductsByCategory.js';
 
 function App() {
   return (

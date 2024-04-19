@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import AboutMe from '../component/AboutMe';
-import Skills from '../component/Skills';
-import Portfolio from '../component/Portfolio';
-import Footer from '../component/footer';
-import Heed from '../component/heed';
+import AboutMe from '../../component/portofolio/AboutMe';
+import Skills from '../../component/portofolio/Skills';
+import Portfolio from '../../component/portofolio/Portfolio';
+import Footer from '../../component/portofolio/footer';
+import Heed from '../../component/portofolio/heed';
 
 class Pro extends Component {
   render() {
