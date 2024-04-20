@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Card, Col, Container, Pagination, Row, Form } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
 import './product.css';
+import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+  import { add_to_cart } from '../../store/cartslice';
 
 function Products() {
   const [products, setProducts] = useState([]);
@@ -10,29 +12,31 @@ function Products() {
   const [totalProducts, setTotalProducts] = useState(0);
   const [searchTerm, setSearchTerm] = useState('');
   const [category, setCategory] = useState('');
+  
+  const dispatch = useDispatch();
 
   useEffect(() => {
     fetchProducts();
-  }, [currentPage, searchTerm, category]);
+  }, [currentPage, category, searchTerm]); 
 
   const fetchProducts = () => {
-    let apiUrl = `https://dummyjson.com/products?limit=20&skip=${(currentPage - 1) * 20}`;
-
+    let apiUrl = '';
     if (category) {
-      apiUrl += `&category=${category}`;
-    }
-
-    if (searchTerm) {
-      apiUrl += `&q=${searchTerm}`;
+      apiUrl = `https://dummyjson.com/products/category/${category}?skip=${(currentPage - 1) * 20}&limit=20`;
+    } else {
+      apiUrl = `https://dummyjson.com/product?skip=${(currentPage - 1) * 20}&limit=20`;
     }
 
     axios.get(apiUrl)
       .then((res) => {
-        const filteredProducts = res.data.products.filter(product =>
-          product.title.toLowerCase().includes(searchTerm.toLowerCase())
-        );
+        let filteredProducts = res.data.products;
+        if (searchTerm) {
+          filteredProducts = filteredProducts.filter(product =>
+            product.title.toLowerCase().includes(searchTerm.toLowerCase())
+          );
+        }
         setProducts(filteredProducts);
-        setTotalProducts(filteredProducts.length);
+        setTotalProducts(res.data.total);
       })
       .catch((err) => console.log(err));
   };
@@ -58,27 +62,28 @@ function Products() {
       </Form>
       <Row>
         {products.map(product => (
-         
-         <Col key={product.id} xs={12} sm={6} md={4} lg={4} className="product-column">
-         <Card className="product-card">
-           <Link to={`/productdetails/${product.id}`}>
-             <Card.Img className="product-image" variant="top" src={product.thumbnail} alt={product.title} />
-           </Link>
-           <Card.Body>
-             <Card.Title>{product.title}</Card.Title>
-             {/* Add additional product information here if needed */}
-           </Card.Body>
-         </Card>
-       </Col>
-     ))}
-   </Row>
-   <Pagination className="justify-content-center mt-4">
-     <Pagination.Prev className="pagination-button" onClick={() => handlePageChange(currentPage - 1)} disabled={currentPage === 1} />
-     <Pagination.Item active>{currentPage}</Pagination.Item>
-     <Pagination.Next className="pagination-button" onClick={() => handlePageChange(currentPage + 1)} disabled={isLastPage} />
-   </Pagination>
- </Container>
-);
+          <Col key={product.id} xs={12} sm={6} md={4} lg={4} className="product-column">
+            <Card className="product-card">
+              <Link to={`/productdetails/${product.id}`}>
+                <Card.Img style={{height:'300px'}}  className="product-image" variant="top" src={product.thumbnail} alt={product.title} />
+              </Link>
+              
+              <span>
+                <button onClick={() => dispatch(add_to_cart(product))}>add to cart</button>
+                <button>add to wishlist</button>
+              </span>
+
+            </Card>
+          </Col>
+        ))}
+      </Row>
+      <Pagination className="justify-content-center mt-4">
+        <Pagination.Prev className="pagination-button" onClick={() => handlePageChange(currentPage - 1)} disabled={currentPage === 1} />
+        <Pagination.Item active>{currentPage}</Pagination.Item>
+        <Pagination.Next className="pagination-button" onClick={() => handlePageChange(currentPage + 1)} disabled={isLastPage} />
+      </Pagination>
+    </Container>
+  );
 }
 
 export default Products;

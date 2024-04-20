@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Nav, Navbar, NavDropdown } from 'react-bootstrap';
+import { useSelector } from 'react-redux';
 
 const categories = [
   "smartphones",
@@ -26,6 +27,8 @@ const categories = [
 ];
 
 function Navbb() {
+  const cart = useSelector((state) => state.cart);
+
   return (
     <Navbar collapseOnSelect expand="lg" bg="light" variant="light">
       <div className="container-fluid">
@@ -37,13 +40,15 @@ function Navbb() {
             <Nav.Link as={Link} to="/Portfolio">Portfolio</Nav.Link>
             <Nav.Link as={Link} to="/Movies">Movies</Nav.Link>
             <Nav.Link as={Link} to="/products">Products</Nav.Link>
+            <Nav.Link as={Link} to="/cart">Cart - {cart?.length || 0}</Nav.Link>
+            <Nav.Link as={Link} to="/wishlist">Wishlist</Nav.Link>
+
             <NavDropdown title="Categories" id="navbarScrollingDropdown">
               {categories.map(category => (
-                <NavDropdown.Item as={Link} key={category} to={`/category/${category}`}>{category}</NavDropdown.Item>
+                <NavDropdown.Item key={category} as={Link} to={`/category/${category}`}>{category}</NavDropdown.Item>
               ))}
             </NavDropdown>
           </Nav>
-        
         </Navbar.Collapse>
       </div>
     </Navbar>

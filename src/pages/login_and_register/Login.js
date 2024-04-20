@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
-import { Alert } from 'react-bootstrap';
+import { Alert, Form, Button, Container } from 'react-bootstrap';
 import Home from '../my home/home';
+import './login.css'; // Import your custom CSS file
 
 function Login() {
 
@@ -24,30 +25,32 @@ function Login() {
     }
 
     return (
-        <div>
-            {home ? <form onSubmit={handleLogin}>
+        <div className="login-container">
+          <div className="login-card"> 
+
+            {home ? <Form onSubmit={handleLogin} className="login-form">
                 <h3>LogIn</h3>
-                <div className="form-group">
-                    <label>Email</label>
-                    <input type="email" className="form-control" placeholder="Enter email" onChange={(event) => setEmaillog(event.target.value)} />
-                </div>
+                <Form.Group controlId="email">
+                    <Form.Label>Email</Form.Label>
+                    <Form.Control type="email" placeholder="Enter email" onChange={(event) => setEmaillog(event.target.value)} />
+                </Form.Group>
 
-                <div className="form-group">
-                    <label>Password</label>
-                    <input type="password" className="form-control" placeholder="Enter password" onChange={(event) => setPasswordlog(event.target.value)} />
-                </div>
+                <Form.Group controlId="password">
+                    <Form.Label>Password</Form.Label>
+                    <Form.Control type="password" placeholder="Enter password" onChange={(event) => setPasswordlog(event.target.value)} />
+                </Form.Group>
 
-                <button type="submit" className="btn btn-dark btn-lg btn-block">Login</button>
+                <Button type="submit" variant="dark" className="btn btn-dark btn-lg btn-block">Login</Button>
 
-                {errors && <Alert color='primary' variant="warning" >
+                {errors && <Alert variant="warning" className="alert">
                     Fill correct Info else keep trying.
                         </Alert>}
-            </form>
+            </Form>
                 : <Home />
             }
-
+                </div>
         </div>
     )
 }
 
-export default Login
+export default Login;

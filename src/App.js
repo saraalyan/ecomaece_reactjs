@@ -11,7 +11,9 @@ import moviesdetails from './pages/movies/moviesdetails.js';
 import ProductDetails from'./pages/ecomearce_product/ProductDetails.js';
 import Products from './pages/ecomearce_product/products.js';
 import ProductsByCategory from './pages/ecomearce_product/ProductsByCategory.js';
-
+import wishlist from './pages/ecomearce_product/wishllist/wishlist.js'
+import cart from './pages/ecomearce_product/cart/cart.js'
+// import Products from './pages/ecomearce_product/prod2.js';
 function App() {
   return (
     <>
@@ -23,6 +25,8 @@ function App() {
           <Route component={Register} path="/register" exact /> 
           <Route component={Pro} path="/Portfolio" exact /> 
           <Route component={Products} path="/Products" exact /> 
+          <Route component={cart} path="/cart" exact /> 
+          <Route component={wishlist} path="/wishlist" exact /> 
           <Route path="/category/:category" component={ProductsByCategory} />
           <Route component={Movies} path="/Movies" exact /> 
           <Route component={ProductDetails} path="/ProductDetails/:id" exact /> 
