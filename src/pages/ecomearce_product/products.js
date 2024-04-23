@@ -4,7 +4,7 @@ import { Card, Col, Container, Pagination, Row, Form } from 'react-bootstrap';
 import './product.css';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-  import { add_to_cart } from '../../store/cartslice';
+  import { addToCart } from '../../store/actions/cartActions';
 
 function Products() {
   const [products, setProducts] = useState([]);
@@ -66,10 +66,12 @@ function Products() {
             <Card className="product-card">
               <Link to={`/productdetails/${product.id}`}>
                 <Card.Img style={{height:'300px'}}  className="product-image" variant="top" src={product.thumbnail} alt={product.title} />
+                <div>{product.stock}</div>
+
               </Link>
               
               <span>
-                <button onClick={() => dispatch(add_to_cart(product))}>add to cart</button>
+              <button onClick={() => { if (product.stock > 0) { dispatch(addToCart(product)); } }} disabled={product.stock === 0}>add to cart</button>
                 <button>add to wishlist</button>
               </span>
 
