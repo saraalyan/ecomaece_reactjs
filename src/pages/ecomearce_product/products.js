@@ -5,15 +5,17 @@ import './product.css';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { addToCart } from '../../store/actions/cartActions';
-import { add, remove } from '../../store/actions/wishlist_actions'; // Import wishlist actions
+import { add, remove } from '../../store/actions/wishlist_actions';
+import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
 
 function Products() {
+  const { category } = useParams();
   const [products, setProducts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalProducts, setTotalProducts] = useState(0);
   const [searchTerm, setSearchTerm] = useState('');
-  const [category, setCategory] = useState('');
-  const wishlist = useSelector(state => state.wishlist); // Access wishlist state
+
+  const wishlist = useSelector(state => state.wishlist); 
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -82,7 +84,7 @@ function Products() {
                 <div>{product.stock}</div>
               </Link>
               <span>
-                <button onClick={() => { if (product.stock > 0) { dispatch(addToCart(product)); } }}>add to cart</button>
+                <button onClick={() =>  { dispatch(addToCart(product)); } }>add to cart</button>
                 <button 
   onClick={() => {
     if (!isProductInWishlist(product.id)) {
