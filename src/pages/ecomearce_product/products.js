@@ -4,7 +4,8 @@ import { Card, Col, Container, Pagination, Row, Form } from 'react-bootstrap';
 import './product.css';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-  import { addToCart } from '../../store/actions/cartActions';
+import { addToCart } from '../../store/actions/cartActions';
+import { add, remove } from '../../store/actions/wishlist_actions'; // Import wishlist actions
 
 function Products() {
   const [products, setProducts] = useState([]);
@@ -12,7 +13,7 @@ function Products() {
   const [totalProducts, setTotalProducts] = useState(0);
   const [searchTerm, setSearchTerm] = useState('');
   const [category, setCategory] = useState('');
-  
+  const wishlist = useSelector(state => state.wishlist); // Access wishlist state
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -45,6 +46,18 @@ function Products() {
     setCurrentPage(page);
   };
 
+  const addToWishlistHandler = (product) => {
+    dispatch(add(product));
+  };
+
+  const removeFromWishlistHandler = (product) => {
+    dispatch(remove(product));
+  };
+
+  const isProductInWishlist = (productId) => {
+    return wishlist.some(product => product.id === productId);
+  };
+
   const totalPages = Math.ceil(totalProducts / 20);
   const isLastPage = currentPage === totalPages;
 
@@ -67,14 +80,23 @@ function Products() {
               <Link to={`/productdetails/${product.id}`}>
                 <Card.Img style={{height:'300px'}}  className="product-image" variant="top" src={product.thumbnail} alt={product.title} />
                 <div>{product.stock}</div>
-
               </Link>
-              
               <span>
-              <button onClick={() => { if (product.stock > 0) { dispatch(addToCart(product)); } }} disabled={product.stock === 0}>add to cart</button>
-                <button>add to wishlist</button>
-              </span>
+                <button onClick={() => { if (product.stock > 0) { dispatch(addToCart(product)); } }}>add to cart</button>
+                <button 
+  onClick={() => {
+    if (!isProductInWishlist(product.id)) {
+      addToWishlistHandler(product);
+    } else {
+      removeFromWishlistHandler(product);
+    }
+  }}
+  disabled={isProductInWishlist(product.id)} 
+>
+  {isProductInWishlist(product.id) ? 'Remove from Wishlist' : 'Add to Wishlist'}
+</button>
 
+              </span>
             </Card>
           </Col>
         ))}
