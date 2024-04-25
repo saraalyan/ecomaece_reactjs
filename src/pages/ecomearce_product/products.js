@@ -26,45 +26,49 @@ function Products() {
   useEffect(() => {
     fetchProducts();
     setCategoryName(category);
-  }, [currentPage, category, searchTerm, minPrice, maxPrice]); 
-
+  }, [currentPage, category, searchTerm, minPrice, maxPrice]);
   const fetchProducts = () => {
     let apiUrl = '';
     let params = {
       skip: (currentPage - 1) * 20,
       limit: 20
     };
-
+  
     if (category) {
       apiUrl = `https://dummyjson.com/products/category/${category}`;
     } else {
       apiUrl = `https://dummyjson.com/products`;
     }
+  
     if (searchTerm) {
-      params.title = searchTerm;
+      apiUrl += `?title=${searchTerm}`;
+    } else {
+      apiUrl += `?`;
     }
+  
     if (minPrice) {
-      params.min_price = minPrice;
+      apiUrl += `&min_price=${minPrice}`;
     }
-
+  
     if (maxPrice) {
-      params.max_price = maxPrice;
+      apiUrl += `&max_price=${maxPrice}`;
     }
-    apiUrl += `?${new URLSearchParams(params).toString()}`;
-    axios.get(apiUrl)
-      .then((res) => {
-        let filteredProducts = res.data.products;
-        if (searchTerm || minPrice || maxPrice) {
-          filteredProducts = filteredProducts.filter(product =>
-            product.title.toLowerCase().includes(searchTerm.toLowerCase()) &&
-            (!minPrice || parseFloat(product.price) >= parseFloat(minPrice)) &&
-            (!maxPrice || parseFloat(product.price) <= parseFloat(maxPrice))
-          );
-        }
-        setProducts(filteredProducts);
-        setTotalProducts(res.data.total);
-      })
-      .catch((err) => console.log(err));
+  
+    axios.get(apiUrl, { params })
+  .then((res) => {
+    let filteredProducts = res.data.products;
+    if (searchTerm || minPrice || maxPrice) {
+      filteredProducts = filteredProducts.filter(product =>
+        product.title.toLowerCase().includes(searchTerm.toLowerCase()) &&
+        (!minPrice || parseFloat(product.price) >= parseFloat(minPrice)) &&
+        (!maxPrice || parseFloat(product.price) <= parseFloat(maxPrice))
+      );
+    }
+    setProducts(filteredProducts);
+    setTotalProducts(res.data.total);
+  })
+  .catch((err) => console.log(err));
+
   };
 
   const handlePageChange = (page) => {

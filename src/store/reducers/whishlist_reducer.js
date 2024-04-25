@@ -6,7 +6,7 @@ const wishlist_reducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_TO_Wish_list:
      
-        state.push({ ...action.payload});
+      state.push({ ...action.payload});
       
       return [...state];
 
