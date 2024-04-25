@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Table, Button } from 'react-bootstrap';
 import { remove,clear } from '../store/actions/wishlist_actions';
 import { removeFromCart ,clearCart} from '../store/actions/cartActions';
+
 function ShoppingList({ type }) {
   const list = useSelector((state) => type === 'wishlist' ? state.wishlist : state.cart);
   

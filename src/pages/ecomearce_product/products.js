@@ -7,6 +7,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addToCart } from '../../store/actions/cartActions';
 import { add, remove } from '../../store/actions/wishlist_actions';
 import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
+import { FaShoppingCart, FaHeart } from 'react-icons/fa'; 
+import Footer from '../../component/portofolio/footer';
 
 function Products() {
   const { category } = useParams();
@@ -14,28 +16,49 @@ function Products() {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalProducts, setTotalProducts] = useState(0);
   const [searchTerm, setSearchTerm] = useState('');
+  const [categoryName, setCategoryName] = useState('');
+  const [minPrice, setMinPrice] = useState('');
+  const [maxPrice, setMaxPrice] = useState('');
 
   const wishlist = useSelector(state => state.wishlist); 
   const dispatch = useDispatch();
 
   useEffect(() => {
     fetchProducts();
-  }, [currentPage, category, searchTerm]); 
+    setCategoryName(category);
+  }, [currentPage, category, searchTerm, minPrice, maxPrice]); 
 
   const fetchProducts = () => {
     let apiUrl = '';
+    let params = {
+      skip: (currentPage - 1) * 20,
+      limit: 20
+    };
+
     if (category) {
-      apiUrl = `https://dummyjson.com/products/category/${category}?skip=${(currentPage - 1) * 20}&limit=20`;
+      apiUrl = `https://dummyjson.com/products/category/${category}`;
     } else {
-      apiUrl = `https://dummyjson.com/product?skip=${(currentPage - 1) * 20}&limit=20`;
+      apiUrl = `https://dummyjson.com/products`;
+    }
+    if (searchTerm) {
+      params.title = searchTerm;
+    }
+    if (minPrice) {
+      params.min_price = minPrice;
     }
 
+    if (maxPrice) {
+      params.max_price = maxPrice;
+    }
+    apiUrl += `?${new URLSearchParams(params).toString()}`;
     axios.get(apiUrl)
       .then((res) => {
         let filteredProducts = res.data.products;
-        if (searchTerm) {
+        if (searchTerm || minPrice || maxPrice) {
           filteredProducts = filteredProducts.filter(product =>
-            product.title.toLowerCase().includes(searchTerm.toLowerCase())
+            product.title.toLowerCase().includes(searchTerm.toLowerCase()) &&
+            (!minPrice || parseFloat(product.price) >= parseFloat(minPrice)) &&
+            (!maxPrice || parseFloat(product.price) <= parseFloat(maxPrice))
           );
         }
         setProducts(filteredProducts);
@@ -65,6 +88,9 @@ function Products() {
 
   return (
     <Container>
+       <div className='row'>
+        <img src={require('../../assests/images/image2.png')} alt="Image Description" style={{width:'100%'}}/>
+      </div>
       <Form className="mt-3">
         <Form.Group controlId="searchTerm">
           <Form.Control 
@@ -74,31 +100,52 @@ function Products() {
             onChange={(e) => setSearchTerm(e.target.value)} 
           />
         </Form.Group>
+        <Form.Group controlId="minPrice">
+          <Form.Control 
+            type="number" 
+            placeholder="Min Price" 
+            value={minPrice} 
+            onChange={(e) => setMinPrice(e.target.value)} 
+          />
+        </Form.Group>
+        <Form.Group controlId="maxPrice">
+          <Form.Control 
+            type="number" 
+            placeholder="Max Price" 
+            value={maxPrice} 
+            onChange={(e) => setMaxPrice(e.target.value)} 
+          />
+        </Form.Group>
       </Form>
+     
+      {categoryName && <h2 className="text-center">{categoryName}</h2>}
+
       <Row>
         {products.map(product => (
           <Col key={product.id} xs={12} sm={6} md={4} lg={4} className="product-column">
             <Card className="product-card">
+              <div id='cart_wish'>
+                <button className="cart-button" onClick={() =>  { dispatch(addToCart(product)); } }><FaShoppingCart /></button>
+                <button className="wish-button"
+                  onClick={() => {
+                    if (!isProductInWishlist(product.id)) {
+                      addToWishlistHandler(product);
+                    } else {
+                      removeFromWishlistHandler(product);
+                    }
+                  }}
+                  disabled={isProductInWishlist(product.id)} 
+                >
+                  {isProductInWishlist(product.id) ? <FaHeart style={{color:'red'}}/> : <FaHeart/>}
+                </button>
+                <h5 className="text-center">Description : {product.description}</h5>
+              </div>
               <Link to={`/productdetails/${product.id}`}>
                 <Card.Img style={{height:'300px'}}  className="product-image" variant="top" src={product.thumbnail} alt={product.title} />
-                <div>{product.stock}</div>
               </Link>
-              <span>
-                <button onClick={() =>  { dispatch(addToCart(product)); } }>add to cart</button>
-                <button 
-  onClick={() => {
-    if (!isProductInWishlist(product.id)) {
-      addToWishlistHandler(product);
-    } else {
-      removeFromWishlistHandler(product);
-    }
-  }}
-  disabled={isProductInWishlist(product.id)} 
->
-  {isProductInWishlist(product.id) ? 'Remove from Wishlist' : 'Add to Wishlist'}
-</button>
-
-              </span>
+              <div> <h4 className="text-center">{product.title}</h4>
+              </div> 
+              
             </Card>
           </Col>
         ))}
@@ -108,6 +155,7 @@ function Products() {
         <Pagination.Item active>{currentPage}</Pagination.Item>
         <Pagination.Next className="pagination-button" onClick={() => handlePageChange(currentPage + 1)} disabled={isLastPage} />
       </Pagination>
+      <Footer/>
     </Container>
   );
 }

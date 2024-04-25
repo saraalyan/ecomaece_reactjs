@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import { Container, Row, Col, Image, Carousel } from 'react-bootstrap';
-
+import Footer from '../../component/portofolio/footer';
 function ProductDetails() {
     const { id } = useParams();
     const [productDetails, setProductDetails] = useState(null);
@@ -39,6 +39,8 @@ function ProductDetails() {
                     <p><strong>Category:</strong> {productDetails.category}</p>
                 </Col>
             </Row>
+            <Footer/>
+
         </Container>
     );
 }

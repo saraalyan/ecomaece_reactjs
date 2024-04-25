@@ -1,4 +1,3 @@
-// rootReducer.js
 import { combineReducers } from 'redux';
 import cartReducer from './reducers/cartReducer';
 import languageReducer from './reducers/lang_reducer';

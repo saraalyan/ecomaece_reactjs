@@ -1,9 +1,9 @@
 
 import { ADD_TO_CART, REMOVE_FROM_CART, CLEAR_CART } from '../types/actiontypes';
 
-const initialState = [];
+const initialState1 = [];
 
-const cartReducer = (state = initialState, action) => {
+const cartReducer = (state = initialState1, action) => {
   switch (action.type) {
     case ADD_TO_CART:
       const existingProductIndex = state.findIndex(product => product.id === action.payload.id);

@@ -5,7 +5,6 @@ const initialState = [];
 const wishlist_reducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_TO_Wish_list:
-      const existingProductIndex = state.findIndex(product => product.id === action.payload.id);
      
         state.push({ ...action.payload});
       

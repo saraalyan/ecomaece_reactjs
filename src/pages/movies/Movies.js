@@ -3,7 +3,7 @@ import axios from 'axios';
 import { Card, Col, Container, Pagination, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import './Movies.css';
-
+import Footer from '../../component/portofolio/footer';
 function Movies() {
   const [movies, setMovies] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -70,6 +70,8 @@ function Movies() {
         <Pagination.Item active>{currentPage}</Pagination.Item>
         <Pagination.Next className="pagination-button" onClick={() => handlePageChange(currentPage + 1)} />
       </Pagination>
+      <Footer/>
+
     </Container>
   );
 }

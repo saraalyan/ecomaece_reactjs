@@ -3,7 +3,7 @@ import { Form, Button, Alert } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { Formik } from 'formik';
 import Login from './Login'; 
-import './Registration.css'; // Import your custom CSS file
+import './Registration.css'; 
 
 function Registration() {
     const [isRegistered, setIsRegistered] = useState(false);
@@ -118,3 +118,5 @@ function Registration() {
 }
 
 export default Registration;
+
+

@@ -1,7 +1,7 @@
 import React from 'react';
 import ShoppingList from '../../../component/table';
 
-function Cart() {
+function wishlist() {
   return (
     <div>
       <ShoppingList type="wishlist" /> 
@@ -9,4 +9,4 @@ function Cart() {
   );
 }
 
-export default Cart;
+export default wishlist;
