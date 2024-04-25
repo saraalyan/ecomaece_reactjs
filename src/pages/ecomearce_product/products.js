@@ -9,6 +9,7 @@ import { add, remove } from '../../store/actions/wishlist_actions';
 import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
 import { FaShoppingCart, FaHeart } from 'react-icons/fa'; 
 import Footer from '../../component/portofolio/footer';
+import './product.css';
 
 function Products() {
   const { category } = useParams();
@@ -147,8 +148,14 @@ function Products() {
               <Link to={`/productdetails/${product.id}`}>
                 <Card.Img style={{height:'300px'}}  className="product-image" variant="top" src={product.thumbnail} alt={product.title} />
               </Link>
-              <div> <h4 className="text-center">{product.title}</h4>
-              </div> 
+<div>
+  <h4 className="text-center">{product.title}</h4>
+  <p className="text-center">Price: ${product.price}</p>
+  <div className="text-center">
+    
+  </div>
+</div>
+
               
             </Card>
           </Col>
