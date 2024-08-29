@@ -1,0 +1,291 @@
+/* تأكد من أن الـ service-item يحتل كامل المساحة ويكون في الوضع النسبي */
+.service-item {
+    position: relative;
+    border: 2px solid #ccc; /* يمكنك تعديل اللون حسب التصميم الخاص بك */
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 2rem;
+    display: flex; /* استخدام Flexbox */
+    flex-direction: column; /* عمودي */
+    align-items: center; /* محاذاة العناصر أفقياً */
+    text-align: center; /* محاذاة النصوص */
+    background-color: #E3DFDC;
+}
+
+/* وضع الأيقونة في منتصف الحدود العلوية */
+.service-icon {
+    position: absolute;
+    top: -50px; /* تعديل المسافة حسب الحجم المناسب */
+    left: 70%;
+    transform: translateX(-50%); /* توسيط الأيقونة أفقياً */
+    background: #E3DFDC; /* يمكنك تعديل الخلفية حسب التصميم الخاص بك */
+    border-radius: 50%;
+    border: 2px solid #765f52; /* يمكنك تعديل اللون حسب التصميم الخاص بك */
+}
+
+/* ضبط حجم الأيقونة */
+.service-icon img {
+    width: 80px; /* حجم الأيقونة */
+    height: 80px; /* حجم الأيقونة */
+}
+
+/* الصورة الثانية التي سيتم تطبيق تأثير الزوم عليها */
+.service-image {
+    width: 300px; /* عرض الصورة */
+    height: auto; /* الحفاظ على نسبة العرض إلى الارتفاع */
+    margin-bottom: 10px; /* مسافة صغيرة بين الصورة والعنوان */
+    margin-top: 20px;  
+    border-radius: 9px;
+    transition: transform 0.3s ease-in-out;
+}
+
+/* تأثير الزوم على الصورة الثانية */
+.service-item:hover .service-image {
+    transform: scale(1.1);
+}
+.photo-gallery {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .main-image {
+    position: relative;
+  }
+  
+  .main-image img {
+    width: 100%; /* حجم الصورة الكبيرة */
+    max-width: 800px;
+    cursor: pointer;
+  }
+  
+  .download-btn {
+    display: block;
+    margin-top: 10px;
+    color: #007bff;
+    text-decoration: none;
+  }
+  
+  .thumbnail-gallery {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  .thumbnail-item {
+    position: relative;
+    margin: 5px;
+  }
+  
+  .thumbnail-gallery img {
+    width: 100px; /* حجم الصور الصغيرة */
+    height: 75px;
+    cursor: pointer;
+  }
+  
+  .thumbnail-item .download-btn {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background-color: #fff;
+    color: #007bff;
+    text-decoration: none;
+    padding: 5px;
+    border-radius: 3px;
+  }
+  .photo-gallery .main-image img {
+    transition: opacity 0.5s ease-in-out;
+    opacity: 0;
+  }
+  
+  .photo-gallery .main-image img.loaded {
+    opacity: 1;
+  }
+  
+  .thumbnail-item img {
+    transition: transform 0.3s ease;
+  }
+  
+  .thumbnail-item img:hover {
+    transform: scale(1.1);
+  }
+  .ril__outer {
+  
+    padding-top: 4rem;
+}
+.photo-gallery .main-image img.loaded {
+    opacity: 1;
+    border-radius: 35px;
+}
+.main-image img {
+    width: 100%;
+    height: 400px;
+    max-width: 800px;
+    cursor: pointer;
+}
+.thumbnail-item img {
+    border-radius: 15px;
+}
+@media (max-width: 768px) {
+    .thumbnail-gallery img {
+       width: 21px;
+       height: 21px;
+       cursor: pointer;
+   }
+   .thumbnail-item img {
+    border-radius: 8px;
+}
+   .main-image img {
+    width: 100%;
+    height: 315px;
+    max-width: 800px;
+    cursor: pointer;
+}
+   }
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   .custom-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+  }
+  
+  
+  .main-image {
+    width: 80%;
+    height: auto;
+    display: block;
+  }
+  
+
+  
+  .text-container {
+    text-align: right;
+    margin-top: 20px;
+  }
+  
+  .arabic-text,.english-text {
+    font-family: 'Cairo', sans-serif;
+    font-size: 24px;
+    line-height: 1.6;
+    text-align: center;
+  }
+  
+  
+  .english-text {
+    font-family: 'Roboto', sans-serif; /* Adjust the font-family as needed */
+    font-size: 24px;
+    line-height: 1.6;
+    margin-top: 10px;
+    text-align: center;
+
+
+  }
+  
+  @media (min-width: 768px) {
+    .custom-container {
+      flex-direction: row;
+    }
+  
+    .text-container {
+      flex: 1;
+      padding-left: 20px;
+    }
+  
+    .image-container {
+      flex: 1;
+      padding-right: 20px;
+    }
+  }
+  /* Animation for fading in and scaling up */
+@keyframes fadeInScaleUp {
+  0% {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.custom-container {
+  animation: fadeInScaleUp 0.6s ease-out;
+}
+
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+/* تأثيرات الأنيميشن للصورة الرئيسية */
+.imageContainer img {
+  opacity: 0;
+  transform: scale(1.1);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.imageContainer img.visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* تأثيرات الأنيميشن لصفوف الخدمات */
+.serviceRow {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.serviceRow.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+/* CSS animations for the images and service rows */
+.imageContainer img,
+.serviceRow {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+/* Add this class to make the element visible */
+.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* التأثير للصور */
+.fade-in {
+  opacity: 0;
+  transform: translateX(-20px); /* لتأثير الانزلاق من اليسار، استخدم translateX(20px) للانزلاق من اليمين */
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.fade-in.in-view {
+  opacity: 1;
+  transform: translateX(0); /* إعادة العنصر إلى وضعه الطبيعي */
+}
+
+

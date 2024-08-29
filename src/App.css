@@ -36,3 +36,24 @@
     transform: rotate(360deg);
   }
 }
+:root {
+  --background-color-light: #f5f5f5;
+  --background-color-dark: #1e2120;
+  --text-color-light: #000000;
+  --text-color-dark: #ffffff;
+  --padding-color-light: #f5f5f5; 
+  --padding-color-dark: #333333; 
+}
+
+[data-theme="dark"] {
+  --background-color-light: #1e2120;
+  --text-color-light: #ffffff;
+  --padding-color-light: #1e2120;
+}
+
+[data-theme="light"] {
+  --background-color-light: #f5f5f5;
+  --text-color-light: #000000;
+  --padding-color-light: #f5f5f5;
+}
+

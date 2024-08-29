@@ -1,0 +1,32 @@
+/* الوضع الافتراضي (وضع النهار) */
+.navbar-custom {
+  background-color: #7f7967;
+  color: #000000;
+}
+
+.navbar-custom .nav-link {
+  color: #000000;
+}
+
+.navbar-custom .navbar-brand img {
+  filter: none; /* لا تطبق أي تأثيرات على الصور */
+}
+
+/* وضع الليل (الوضع الداكن) */
+.navbar-dark-mode {
+  background-color: #1e2120;
+  color: #ffffff;
+}
+
+.navbar-dark-mode .nav-link {
+  color: #ffffff;
+}
+
+.navbar-dark-mode .navbar-brand img {
+  filter: invert(100%);
+}
+
+.btn-outline-light {
+  color: #ffffff;
+  border-color: #ffffff;
+}
