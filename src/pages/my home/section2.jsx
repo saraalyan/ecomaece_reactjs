@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import './sev.css';
-import im from '../../assests/images/Untitled design (52).png';
+import im from '../../assests/images/Untitled (720 x 500 px) (4).png';
 
 const CustomComponent = () => {
   const lang = useSelector((state) => state.lang.lang);
@@ -46,7 +46,7 @@ const CustomComponent = () => {
   return (
     <div
       ref={containerRef}
-      className="custom-container "
+      className="custom-container container "
       style={footerStyle}
     >
       <div className="image-container">
@@ -60,24 +60,24 @@ const CustomComponent = () => {
         {lang === 'en' ? (
           <>
             <p className="english-text">
-              Because we believed in our vision to be the first choice for customers in our field<br />
-              To provide everything related to design, interior
+            Modern Homes is your ideal partner in transforming your house into a living space that reflects your refined taste. 
             </p>
             <p className="english-text">
-              And to meet all the client's requirements and visions with the highest quality and competitive prices
+            We specialize in the complete renovation and professional finishing of your entire home, including bathrooms, kitchens, furniture, and decor. 
             </p>
+
           </>
         ) : (
           <>
             <p className="arabic-text">
-              لأننا آمنا برؤيتنا بأن نكون الخيار الأول للعملاء في مجالنا
+
+             الأبيات المواكبة   هي شريكك المثالي في تحويل منزلك إلى مساحة معيشية تعكس ذوقك الراقي
             </p>
             <p className="arabic-text">
-              بأن نوفر كل ما يتعلق بالتصميم والتنفيذ الداخلي
+            . نحن متخصصون في الترميم والتشطيب الاحترافي لكامل منزلك، بما في ذلك دورات المياه والمطابخ والأثاث والديكورات
             </p>
-            <p className="arabic-text">
-              وإرضاء كافة مطالب وتصورات العميل بأعلى جودة وأسعار تنافسية
-            </p>
+            
+          
           </>
         )}
       </div>

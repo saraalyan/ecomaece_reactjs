@@ -1,94 +1,142 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
-
+import cot from '../../../assests/images/modern-home-logo - Copy.png';
+import { Row } from 'react-bootstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faStar } from '@fortawesome/free-solid-svg-icons';
 const features = {
   ar: [
-    { feature: 'التصميم الداخلي', included: '3D MAX & AutoCad' },
-    { feature: 'الحمالة', included: 'متقدم' },
-    { feature: 'احواض المغاسل', included: 'رخام جاهز' },
-    { feature: 'الكراسي والمروشات وبديل الرخام او الجبس', included: 'مدفون' },
-    { feature: 'بورسلان', included: 'اساسي' },
-    { feature: 'رخام', included: 'غير مطابق' },
-    { feature: 'تحويلات جباريه', included: 'اساسي' },
-    { feature: 'الاسقف', included: 'يشمل للحد الاعلى' },
-    { feature: 'الدهانات', included: 'فسيفساء' },
-    { feature: 'تكييف', included: 'زجاج معتم' },
-    { feature: 'الاناره', included: 'شتر' },
-    { feature: 'ورق الجدران', included: 'سكاي لايت' },
-    { feature: 'ديكورات جباريه', included: 'جوتن دهانات اللاكيه' },
-    { feature: 'وحدات خشب', included: 'خشب البلوط الأبيض' },
-    { feature: 'اجهزه الكترونيه', included: 'شيبورد' },
-    { feature: 'اثاث', included: 'يشمل' },
-    { feature: 'الستائر', included: 'اضافة / مميزات اكثر' },
-    { feature: 'الستائر الخشبيه', included: 'كانفس' },
-    { feature: 'الثريات', included: 'مودرن' },
-    { feature: 'اضاءه ارضيه', included: 'اضاءة مغنطيسية و نجف ستريب' },
-    { feature: 'مطبخ', included: 'تفصيل' },
-    { feature: 'ثلاجه', included: 'جزيرة' },
-    { feature: 'مواقد و شفاطات', included: 'تفصيل' },
-    { feature: 'غرفه نوم رئيسيه', included: 'تفصيل' },
-    { feature: 'غرفه نوم لشخصين متصلة', included: 'تفصيل' },
-    { feature: 'غرفه اطفال', included: 'خشب' },
-    { feature: 'ملحقات وتنجيد', included: 'ديكور شاشة او سينما' },
-    { feature: 'طاولات وسائد', included: 'شلالات موديرن' },
-    { feature: 'حدائق ورفوف', included: 'الايتيكيت و طاولات ذكية' },
-    { feature: 'المطبخ', included: 'يشمل للحد الاعلى' },
-    { feature: 'ذكاء المنزل', included: 'نظام ذكي مع اليكسيا' },
+    { feature: 'التصميم الداخلي', included: 'يصمم من الاقتراحات من قبل العميل' },
+    { feature: 'العمالة', included: 'قياسي' },
+    { feature: 'احواض المغاسل', included: 'رخام جاهز - تصنيف (ج)' },
+    { feature: 'الكراسي و المراوش', included: 'معلق - تصنيف (ج)' },
+    { feature: 'بديل الرخام او احجار', included: 'قياسي' },
+    { feature: 'سيراميك', included: 'غير مطابق' },
+    { feature: 'بروسلان', included: 'قياسي' },
+    { feature: 'رخام', included: 'يشمل للحد الاعلى' },
+    { feature: 'تجويفات جدارية', included: 'قياسي' },
+    { feature: 'ابواب', included: 'زجاج معتم' },
+    { feature: 'شبابيك', included: 'للحد الاعلى (Shutter)' },
+    { feature: 'الاسقف', included: 'للحد الاعلى (اسمنتي)' },
+    { feature: 'دهان', included: 'جوتن ديوروتان' },
+    { feature: 'باركيه', included: 'باركيه المصفح (Laminate Parquet)' },
+    { feature: 'ديكورات جدارية', included: 'بورسلان' },
+    { feature: 'ورق حائط', included: 'يشمل' },
+    { feature: 'اجهزة الكترونية', included: 'اضافة / مميزات اكثر' },
+    { feature: 'لوحات', included: 'كانفس' },
+    { feature: 'السجاد', included: 'مودرن' },
+    { feature: 'النجف و الاضاءات', included: 'اضاءة مغنطيسية و نجف ستريب' },
+    { feature: 'كنب ضيوف', included: 'تفصيل - تصنيف (ج)' },
+    { feature: 'الخزائن', included: 'تفصيل يشمل الجزيرة - تصنيف (ج)' },
+    { feature: 'غرفة نوم رئيسية', included: 'تفصيل - تصنيف (ج)' },
+    { feature: 'غرفة نوم لشخصين منفصلة', included: 'تفصيل - تصنيف (ج)' },
+    { feature: 'غرفة اطفال', included: 'تفصيل - تصنيف (ج)' },
+    { feature: 'اكسسوارات و تحف', included: 'تفصيل' },
+    { feature: 'المطابخ', included: 'خشب' },
+    { feature: 'البلكونه', included: 'ديكور شاشة او سينما' },
+    { feature: 'الحوش الخارجي', included: 'شلالات موديرن' },
+    { feature: 'تنظيم المنزل', included: 'الايتيكيت و طاولات ذكية' },
+    { feature: 'ذكاء البيت', included: '"يشمل للحد الاعلى نظام ذكي مع اليكسيا"' },
   ],
   en: [
-    { feature: 'Interior Design', included: '3D MAX & AutoCad' },
-    { feature: 'Carrier', included: 'Advanced' },
-    { feature: 'Sink Basins', included: 'Ready Marble' },
-    { feature: 'Chairs and Showers and Marble or Gypsum Alternative', included: 'Buried' },
-    { feature: 'Porcelain', included: 'Basic' },
-    { feature: 'Marble', included: 'Not Included' },
-    { feature: 'Compulsory Conversions', included: 'Basic' },
-    { feature: 'Ceilings', included: 'Includes Maximum Limit' },
-    { feature: 'Paints', included: 'Mosaic' },
-    { feature: 'Air Conditioning', included: 'Opaque Glass' },
-    { feature: 'Lighting', included: 'Shutters' },
-    { feature: 'Wallpaper', included: 'Skylight' },
-    { feature: 'Compulsory Decorations', included: 'Jotun Lacquer Paint' },
-    { feature: 'Wood Units', included: 'White Oak Wood' },
-    { feature: 'Electronic Devices', included: 'Chipboard' },
-    { feature: 'Furniture', included: 'Includes' },
-    { feature: 'Curtains', included: 'Additional / More Features' },
-    { feature: 'Wooden Curtains', included: 'Canvas' },
-    { feature: 'Chandeliers', included: 'Modern' },
-    { feature: 'Floor Lighting', included: 'Magnetic and Strip Lighting' },
-    { feature: 'Kitchen', included: 'Custom' },
-    { feature: 'Refrigerator', included: 'Island' },
-    { feature: 'Ovens and Exhausts', included: 'Custom' },
-    { feature: 'Master Bedroom', included: 'Custom' },
-    { feature: 'Double Bedroom Connected', included: 'Custom' },
-    { feature: 'Children\'s Room', included: 'Wood' },
-    { feature: 'Accessories and Upholstery', included: 'Screen or Cinema Decor' },
-    { feature: 'Tables and Cushions', included: 'Modern Waterfalls' },
-    { feature: 'Gardens and Shelves', included: 'Etiquette and Smart Tables' },
-    { feature: 'The Kitchen', included: 'Includes Maximum Limit' },
-    { feature: 'Smart Home', included: 'Smart System with Alexa' },
+    { feature: 'Interior Design', included: 'Designed from client suggestions' },
+    { feature: 'Labor', included: 'Standard' },
+    { feature: 'Sink Basins', included: 'Ready marble - Classification (C)' },
+    { feature: 'Chairs and Showers', included: 'Hanging - Classification (C)' },
+    { feature: 'Marble or Stone Substitute', included: 'Standard' },
+    { feature: 'Ceramic', included: 'Not compliant' },
+    { feature: 'Porcelain', included: 'Standard' },
+    { feature: 'Marble', included: 'Included at maximum level' },
+    { feature: 'Wall Niches', included: 'Standard' },
+    { feature: 'Doors', included: 'Opaque glass' },
+    { feature: 'Windows', included: 'Maximum (Shutter)' },
+    { feature: 'Ceilings', included: 'Maximum (Cement)' },
+    { feature: 'Paint', included: 'Jotun Duratan' },
+    { feature: 'Parquet', included: 'Laminate Parquet' },
+    { feature: 'Wall Decorations', included: 'Porcelain' },
+    { feature: 'Wallpaper', included: 'Included' },
+    { feature: 'Electronic Devices', included: 'Additional/More features' },
+    { feature: 'Artworks', included: 'Canvas' },
+    { feature: 'Carpets', included: 'Modern' },
+    { feature: 'Chandeliers and Lights', included: 'Magnetic lighting and strip chandeliers' },
+    { feature: 'Guest Sofa', included: 'Custom - Classification (C)' },
+    { feature: 'Closets', included: 'Custom includes island - Classification (C)' },
+    { feature: 'Master Bedroom', included: 'Custom - Classification (C)' },
+    { feature: 'Double Bedroom', included: 'Custom - Classification (C)' },
+    { feature: 'Children’s Room', included: 'Custom - Classification (C)' },
+    { feature: 'Accessories and Ornaments', included: 'Custom' },
+    { feature: 'Kitchens', included: 'Wood' },
+    { feature: 'Balcony', included: 'Screen or cinema decor' },
+    { feature: 'Outdoor Patio', included: 'Modern waterfalls' },
+    { feature: 'Home Organization', included: 'Etiquette and smart tables' },
+    { feature: 'Smart Home', included: '"Included at maximum level, smart system with Alexa"' },
   ],
 };
 
+
 const FeaturesTableModern = () => {
   const lang = useSelector((state) => state.lang.lang);
+  const [visibleCount, setVisibleCount] = useState(4); // الحالة لتتبع عدد الصفوف المعروضة
+
+  const handleShowMore = () => {
+    setVisibleCount((prevCount) => prevCount + 10); // زيادة عدد الصفوف عند النقر
+  };
 
   return (
-    <div className='container'
+    <div className='container-fluid mt-3'
       style={{
         margin: '20px auto',
-        padding: '20px',
-        backgroundColor: 'rgb(227 223 220)',
+        padding: '10px',
+        backgroundColor: ' #7f7967',
         borderRadius: '8px',
         boxShadow: '0px 0px 15px rgba(0, 0, 0, 0.1)',
         direction: lang === 'ar' ? 'rtl' : 'ltr',
+        width: '90%',
+        fontSize: '1em',
+        fontWeight: 'bold',
+        fontFamily:'cairo'
       }}
     >
+      <Row style={{background:'#FFECD5', marginLeft:'0.1rem', marginRight:'0.1rem', borderTopLeftRadius:'8px',
+            borderTopRightRadius:'8px'}}>
+        <div className='col-11 col-md-4' style={{
+            justifyContent: 'center',
+            alignItems: 'center',
+            display: 'flex',
+            
+            flexDirection: 'column',
+            borderTopLeftRadius:'8px',
+            borderTopRightRadius:'8px'
+        }}>      
+          <img src={cot} alt="Cotton Image" width={'70%'} style={{margin:'1rem'}} />
+        </div>
+        <div className='col-12 col-md-8' style={{
+            justifyContent: 'center',
+            alignItems: 'center',
+            
+            display: 'flex',
+            flexDirection: 'column'
+        }}>
+          <h3 className='text-center'style={{color:'BLACK'}}> 
+            {lang === 'ar' ? 'الباقة المواكبة' : 'Modern Package'}
+          </h3>
+          <p className='text-center'>
+            <FontAwesomeIcon icon={faStar} className="star" style={{color: '#FFD700', marginRight: '5px'}} />
+            <FontAwesomeIcon icon={faStar} className="star" style={{color: '#FFD700', marginRight: '5px'}} />
+            <FontAwesomeIcon icon={faStar} className="star" style={{color: '#FFD700', marginRight: '5px'}} />
+            <FontAwesomeIcon icon={faStar} className="star" style={{color: '#FFD700', marginRight: '5px'}} />
+          </p>
+          <h6 className='text-center'style={{color:'BLACK'}}>
+          {lang === 'ar' ? 'الترقية لنمط حياة مواكب بتصاميم ومواد متطورة تتبع أحدث الصيحات في الديكور العصري و تعزز أسلوب حياتك مع تشطيب رائع' : 'Upgrading to a contemporary lifestyle with sophisticated designs and materials, following the latest trends in modern decors, enhancing your lifestyle with superb finishing.'}
+          </h6>
+        </div>   
+      </Row>
+
       <table
         style={{
           width: '100%',
-          borderCollapse: 'collapse',
+          borderCollapse:"separate",
         }}
       >
         <thead>
@@ -96,27 +144,27 @@ const FeaturesTableModern = () => {
             <th
               style={{
                 padding: '12px 15px',
-                textAlign: 'center', // توسيط النص أفقيًا
-                verticalAlign: 'middle', // توسيط النص عموديًا
+                textAlign: 'center',
+                verticalAlign: 'middle',
                 borderBottom: '1px solid #ddd',
-                backgroundColor: '#765f52',
-                color: 'white',
+                backgroundColor: '#E3DFDC',
+                color: '#000000',
                 fontWeight: 'bold',
-                borderRadius: lang === 'ar' ? '0px 8px 8px 0px' : '8px 0px 0px 8px', // تغيير border-radius بناءً على اللغة
+                fontSize: '16px',
               }}
             >
-              {lang === 'ar' ? 'المنتجات' : 'Products'}
+              {lang === 'ar' ? 'العنصر' : 'Feature'}
             </th>
             <th
               style={{
                 padding: '12px 15px',
-                textAlign: 'center', // توسيط النص أفقيًا
-                verticalAlign: 'middle', // توسيط النص عموديًا
+                textAlign: 'center',
+                verticalAlign: 'middle',
                 borderBottom: '1px solid #ddd',
-                backgroundColor: '#765f52',
-                color: 'white',
+                backgroundColor: '#E3DFDC',
+                color: '#000000',
                 fontWeight: 'bold',
-                borderRadius: lang === 'ar' ? '8px 0px 0px 8px' : '0px 8px 8px 0px', // تغيير border-radius بناءً على اللغة
+                fontSize: '16px',
               }}
             >
               {lang === 'ar' ? 'يشمل' : 'Included'}
@@ -124,29 +172,31 @@ const FeaturesTableModern = () => {
           </tr>
         </thead>
         <tbody>
-          {features[lang].map((feature, index) => (
+          {features[lang].slice(0, visibleCount).map((feature, index) => (
             <tr
               key={index}
               style={{
-                backgroundColor: index % 2 === 0 ? '#f2f2f2' : 'transparent',
+                backgroundColor: index % 2 === 0 ? '#FFFFFF' : '#F2F2F2',
                 borderBottom: '1px solid #ddd',
                 cursor: 'pointer',
               }}
             >
               <td
                 style={{
-                  textAlign: 'center', // توسيط النص أفقيًا
-                  verticalAlign: 'middle', // توسيط النص عموديًا
-                  borderRadius: lang === 'ar' ? '0px 8px 8px 0px' : '8px 0px 0px 8px', // تغيير border-radius بناءً على اللغة
+                  textAlign: 'center',
+                  verticalAlign: 'middle',
+                  padding: '10px',
+                  color: '#4A4A4A',
                 }}
               >
                 {feature.feature}
               </td>
               <td
                 style={{
-                  textAlign: 'center', // توسيط النص أفقيًا
-                  verticalAlign: 'middle', // توسيط النص عموديًا
-                  borderRadius: lang === 'ar' ? '8px 0px 0px 8px' : '0px 8px 8px 0px', // تغيير border-radius بناءً على اللغة
+                  textAlign: 'center',
+                  verticalAlign: 'middle',
+                  padding: '10px',
+                  color: '#4A4A4A',
                 }}
               >
                 {feature.included}
@@ -155,6 +205,25 @@ const FeaturesTableModern = () => {
           ))}
         </tbody>
       </table>
+
+      {visibleCount < features[lang].length && (
+        <div style={{ textAlign: 'center', marginTop: '10px' }}>
+          <button
+            onClick={handleShowMore}
+            style={{
+              padding: '10px 20px',
+              backgroundColor: '#E3DFDC',
+              color: 'black',
+              border: 'none',
+              borderRadius: '5px',
+              cursor: 'pointer',
+              fontSize: '16px',
+            }}
+          >
+            {lang === 'ar' ? 'المزيد' : 'Show More'}
+          </button>
+        </div>
+      )}
     </div>
   );
 };

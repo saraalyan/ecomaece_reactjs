@@ -1,20 +1,5 @@
-// const INITIAL_VALUE = {
-//     lang: "en"
-// };
-
-// export default function languageReducer(state = INITIAL_VALUE, action) {
-//     switch(action.type) {
-//         case "CHANGE_LANG":
-//             return {
-//                 ...state,
-//                 lang: action.payload
-//             };
-//         default:
-//             return state;
-//     }
-// }
 const INITIAL_VALUE = {
-    lang: "en"
+    lang: "ar"
 };
 
 export default function languageReducer(state = INITIAL_VALUE, action) {

@@ -4,7 +4,7 @@ import { FaWhatsapp } from 'react-icons/fa';
 const WhatsAppIcon = () => {
   return (
     <a
-      href="https://wa.me/رقم_الواتساب_الخاص_بك"
+      href="https://api.whatsapp.com/send/?phone=966549400646"
       target="_blank"
       rel="noopener noreferrer"
       style={styles.iconContainer}

@@ -1,0 +1,21 @@
+.image-block {
+    border: 2px solid #ccc; /* إطار حول الصور */
+    padding: 5px;
+    background-color: #f9f9f9; /* خلفية الصورة */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* تأثير الظل */
+    transition: transform 0.3s ease-in-out; /* تأثير عند تحريك الماوس */
+    display: flex;
+    height: max-content;
+  }
+  
+  .image-block:hover {
+    transform: scale(1.05); /* تكبير الصورة قليلاً عند التمرير */
+  }
+  
+  .img-fluid {
+    width: 100%;
+    height: auto;
+    display: block;
+    
+  }
+  

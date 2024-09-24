@@ -1,60 +1,49 @@
-import React from 'react';
-import Radium, { keyframes } from 'radium';
-import { useInView } from 'react-intersection-observer';
+import React, { useEffect } from 'react';
+import Radium from 'radium';
+import { useSelector } from 'react-redux';
 import Slider from './slider1';
-import Footer from '../../../component/portofolio/footer';
 import FeaturesTable from './tablefeature';
 import HomeForm from './form';
-
-const fadeInUp = keyframes`
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-`;
+import { Helmet } from "react-helmet";
 
 
-const styles = {
-  fadeIn: {
-    animation: `${fadeInUp} 1s ease-out`,
-  },
-  hidden: {
-    opacity: 0,
-    transform: 'translateY(20px)',
-    transition: 'opacity 1s ease-out, transform 1s ease-out',
-  },
-  visible: {
-    opacity: 1,
-    transform: 'translateY(0)',
-    transition: 'opacity 1s ease-out, transform 1s ease-out',
-  },
-};
 
-// Custom Hook to create ref and inView state
-const useCreateRefInView = () => {
-  const { ref, inView } = useInView({ threshold: 0.5, triggerOnce: false });
-  return { ref, inView };
-};
 
 const COTTON = () => {
-  const isRTL = true;
+  const isDarkMode = useSelector((state) => state.darkMode.darkMode);
 
-  const featureRef2 = useCreateRefInView();
-  const featureRef6 = useCreateRefInView();
-  // Repeat for other features...
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  const lang = useSelector ((state) => state.lang.lang); 
 
   return (
-    <div className="header-carousel" style={{ paddingTop: '4rem', height: '100vh' }}>
-      <Slider />
-      <FeaturesTable/>
-    <HomeForm/>
-      <Footer />
+    <div 
+      className="container-fluid" 
+      style={{ 
+        paddingTop: '3.5rem', 
+        backgroundColor: isDarkMode ? '#1e2120' : '#f5f5f5', 
+        color: isDarkMode ? '#ffffff' : '#000000', 
+        display:'flex',
+        justifyContent:'center',
+        flexDirection:'column',
+        alignItems:'center'
+      }}
+    > 
+    
+    <Helmet>
+        <title>{lang === 'ar' ? 'ModernHomes باقة قطن' : 'ModernHomes cotton package '}</title>
+        <meta name="description" content={lang === 'ar' ? 'مميزات باقه قطن احدث التصاميم الخاصه لباقه قطن  ارسال طلب خاص بباقة قطن' : 'Features of the Cotton Package The latest special designs for the Cotton Package Send a special request for the Cotton Package'} />
+        <meta name="keywords" content={lang === 'ar' ? 'اتصال, دعم, مبيعات, تجديد, تصليح, ترميم, تصميم داخلي, مقاول, تشطيب, مكتب تصاميم, ديزاين, تنظيم, تنفيذ, راحة, تنسيق, اثاث, كنب, غرفة نوم, غرفة العاب, زواج, فن, رسم, ابداع, اجهزة كهربائية, تعطير, باقه البيت المخملي, باقه النخبه, الباقه الفريده, الباقات, باقة قطن, باقه اسمارت, الباقه الذكية, استشاره مجانيه, اعمالنا, خدمات نقدمها, تصميم اسلوب حياة, تنظيم المنزل, تنفيذ مشاريع, تسليم مفتاح, باقات مناسبة للكل, بيوت ذكية, حلول ذكية, ضمانات, توفير الراحة' 
+: 'contact, support, sales, renovation, repair, restoration, interior design, contractor, finishing, design office, design, organization, implementation, comfort, coordination, furniture, sofa, bedroom, playroom, wedding, art, drawing, creativity, electrical appliances, scenting, velvet home package, elite package, unique package, packages, cotton package, smart package, modern package, free consultation, our work, services we offer, life style design, home organization, project execution, turnkey delivery, packages suitable for everyone, smart homes, smart solutions, guarantees, providing comfort, clear pricing and static plan, bad module, no specific price (ask for more), client choose the service he needs, client choose the designs from the packages, client choose how many rooms, bathrooms, and kitchens he has in his house, client insert his house dimensions and how many floors by square meter, client insert his contact number or social media or emails, client choose the right time & date for calls or visits'} />
+        </Helmet>
+
+      <FeaturesTable />
+      <HomeForm Slider={Slider} defaultPackage="cotton Package" />
+   
     </div>
-  );
+);
 };
 
 export default Radium(COTTON);

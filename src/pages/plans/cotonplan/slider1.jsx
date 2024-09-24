@@ -24,7 +24,15 @@ import cityProfileImage19 from '../../../assests/cotton/IMG-20240823-WA0025.jpg'
 import cityProfileImage20 from '../../../assests/cotton/IMG-20240823-WA0026.jpg';
 import cityProfileImage22 from '../../../assests/cotton/IMG-20240823-WA0027.jpg';
 import cityProfileImage23 from '../../../assests/cotton/IMG-20240823-WA0028.jpg';
+import cityProfileImage24 from '../../../assests/cotton/CO1/1.jpg';
+import cityProfileImage25 from '../../../assests/cotton/CO1/2.jpg';
+import cityProfileImage26 from '../../../assests/cotton/CO1/3.jpg';
+import cityProfileImage27 from '../../../assests/cotton/CO1/4.jpg';
+import cityProfileImage28 from '../../../assests/cotton/CO1/5.jpg';
+import cityProfileImage29 from '../../../assests/cotton/CO1/6.jpg';
+import cityProfileImage30 from '../../../assests/cotton/CO1/7.jpg';
 
+import './slider.css'
 const photos = [
   { src: cityProfileImage, width: 4, height: 3 },
   { src: cityProfileImage1, width: 4, height: 3 },
@@ -42,18 +50,24 @@ const photos = [
   { src: cityProfileImage13, width: 4, height: 3 },  
   { src: cityProfileImage14, width: 4, height: 3 },  
   { src: cityProfileImage15, width: 4, height: 3 },
-  { src: cityProfileImage16, width: 4, height: 3 },
   { src: cityProfileImage17, width: 4, height: 3 },
   { src: cityProfileImage18, width: 4, height: 3 },
-  { src: cityProfileImage19, width: 4, height: 3 },
   { src: cityProfileImage20, width: 4, height: 3 },
   { src: cityProfileImage22, width: 4, height: 3 },
   { src: cityProfileImage23, width: 4, height: 3 },
+  { src: cityProfileImage19, width: 4, height: 3 },
+  { src: cityProfileImage16, width: 4, height: 3 },
+  { src: cityProfileImage24, width: 4, height: 3 },
+  { src: cityProfileImage25, width: 4, height: 3 },
+  { src: cityProfileImage26, width: 4, height: 3 },
+  { src: cityProfileImage27, width: 4, height: 3 },
+  { src: cityProfileImage28, width: 4, height: 3 },
+  { src: cityProfileImage29, width: 4, height: 3 },
+  { src: cityProfileImage30, width: 4, height: 3 },
 
 
 ];
-
-function Slider() {
+function Slider({ onImageSelect }) {
   const [photoIndex, setPhotoIndex] = useState(0);
   const [isOpen, setIsOpen] = useState(false);
   const [loaded, setLoaded] = useState(false);
@@ -62,6 +76,7 @@ function Slider() {
     setLoaded(false);
   }, [photoIndex]);
 
+  
   const handleImageLoad = () => {
     setLoaded(true);
   };
@@ -76,10 +91,11 @@ function Slider() {
 
   const handleThumbnailClick = (index) => {
     setPhotoIndex(index);
+    onImageSelect(photos[index].src); // ارسال الصورة المختارة
   };
 
   return (
-    <div className="photo-gallery pt-4 container">
+    <div className="photo-gallery  container">
       <div className="main-image d-flex justify-content-center">
         <img
           src={photos[photoIndex].src}
@@ -90,7 +106,6 @@ function Slider() {
         />
       </div>
 
-      {/* الصور الصغيرة */}
       <div className="thumbnail-gallery">
         {photos.map((photo, index) => (
           <div key={index} className="thumbnail-item">
@@ -121,4 +136,5 @@ function Slider() {
     </div>
   );
 }
+
 export default Slider;

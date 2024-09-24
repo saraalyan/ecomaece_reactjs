@@ -1,93 +1,138 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
-
+import cot from '../../../assests/images/cotton-logo1.png';
+import { Row } from 'react-bootstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faStar } from '@fortawesome/free-solid-svg-icons';
 const features = {
   ar: [
-    { feature: 'التصميم الداخلي', included: 'جاهز يعدل على منزلك' },
-    { feature: 'الحمالة', included: 'قياسي' },
-    { feature: 'احواض المغاسل', included: 'بورسلان و دولاب' },
-    { feature: 'الكراسي والمروشات وبديل الرخام او الجبس', included: 'متقدم' },
-    { feature: 'بورسلان', included: 'يشمل' },
+    { feature: 'التصميم الداخلي', included: 'يصمم من الاقتراحات من الكتالوج' },
+    { feature: 'العمالة', included: 'قياسي' },
+    { feature: 'احواض المغاسل', included: 'جاهز بورسلان و دولاب - تصنيف (د)' },
+    { feature: 'الكراسي و المراوش', included: 'ملون - تصنيف (د)' },
+    { feature: 'بديل الرخام او احجار', included: 'خارج الميزانية' },
+    { feature: 'سيراميك', included: 'غير مطابق' },
+    { feature: 'بروسلان', included: 'يشمل للحد الاعلى' },
     { feature: 'رخام', included: 'غير مطابق' },
-    { feature: 'تحويلات جباريه', included: 'يشمل للحد الاعلى' },
-    { feature: 'الاسقف', included: 'لا' },
-    { feature: 'الدهانات', included: 'مع اضاءة' },
-    { feature: 'تكييف', included: 'إضافة WBC' },
-    { feature: 'الاناره', included: 'اضافة' },
-    { feature: 'ورق الجدران', included: 'جيبسيم بورد' },
-    { feature: 'ديكورات جباريه', included: 'جوتن اكريليك و فينيل' },
-    { feature: 'وحدات خشب', included: 'HDF Laminate Flooring' },
-    { feature: 'اجهزه الكترونيه', included: 'بديل شيبورد' },
-    { feature: 'اثاث', included: 'جزئي' },
-    { feature: 'الستائر', included: 'اضافة / متوسط' },
-    { feature: 'الستائر الخشبيه', included: 'طباعة 3D' },
-    { feature: 'الثريات', included: 'كثيفة' },
-    { feature: 'اضاءه ارضيه', included: 'نجف جاهز' },
-    { feature: 'مطبخ', included: 'تفصيل' },
-    { feature: 'ثلاجه', included: 'تفصيل' },
-    { feature: 'مواقد و شفاطات', included: 'تفصيل' },
-    { feature: 'غرفه نوم رئيسيه', included: 'تفصيل' },
-    { feature: 'غرفه نوم لشخصين متصلة', included: 'تفصيل' },
-    { feature: 'غرفه اطفال', included: 'فازات كبيرة' },
-    { feature: 'ملحقات وتنجيد', included: 'الألوميتال' },
-    { feature: 'طاولات وسائد', included: 'اضاءات و خداديات' },
-    { feature: 'حدائق ورفوف', included: 'بلاط' },
-    { feature: 'المطبخ', included: 'تزيين متقدم مثال طاولات الطعام' },
-    { feature: 'ذكاء المنزل', included: 'يشمل للحد الاعلى اضاءة و ستائر' },
+    { feature: 'تجويفات جدارية', included: 'قياسي' },
+    { feature: 'ابواب', included: 'للحد الاعلى WBC' },
+    { feature: 'شبابيك', included: 'للحد الاعلى' },
+    { feature: 'الاسقف', included: 'جيبسيم بورد' },
+    { feature: 'دهان', included: 'فينوماستيك مذهل راقي من جوتن' },
+    { feature: 'باركيه', included: 'باركيه الفينيل (Vinyl Parquet)' },
+    { feature: 'ديكورات جدارية', included: 'بديل شيبورد' },
+    { feature: 'ورق حائط', included: 'قياسي' },
+    { feature: 'اجهزة الكترونية', included: 'اضافة / متوسط' },
+    { feature: 'لوحات', included: 'طباعة 3D' },
+    { feature: 'السجاد', included: 'كثيف' },
+    { feature: 'النجف و الاضاءات', included: 'نجف جاهز' },
+    { feature: 'كنب ضيوف', included: 'تفصيل - تصنيف (د)' },
+    { feature: 'الخزائن', included: 'تفصيل - تصنيف (د)' },
+    { feature: 'غرفة نوم رئيسية', included: 'تفصيل - تصنيف (د)' },
+    { feature: 'غرفة نوم لشخصين منفصلة', included: 'تفصيل - تصنيف (د)' },
+    { feature: 'غرفة اطفال', included: 'تفصيل - تصنيف (د)' },
+    { feature: 'اكسسوارات و تحف', included: 'فازات كبيرة' },
+    { feature: 'المطابخ', included: 'الألوميتال' },
+    { feature: 'البلكونه', included: 'اضاءات و خداديات' },
+    { feature: 'الحوش الخارجي', included: 'بلاط' },
+    { feature: 'تنظيم المنزل', included: 'مثل تزيين طاولات الطعام مع الاواني' },
+    { feature: 'ذكاء البيت', included: 'يشمل للحد الاعلى اضاءة و ستائر' },
   ],
   en: [
-    { feature: 'Interior Design', included: 'Ready to apply to your home' },
-    { feature: 'Carrier', included: 'Standard' },
-    { feature: 'Sink Basins', included: 'Normal' },
-    { feature: 'Chairs and Showers and Marble or Gypsum Alternative', included: 'Normal' },
-    { feature: 'Porcelain', included: 'Not Included' },
-    { feature: 'Marble', included: 'Included in Interior Package' },
-    { feature: 'Compulsory Conversions', included: 'Not Included' },
-    { feature: 'Ceilings', included: 'Normal Gypsum' },
-    { feature: 'Paints', included: 'Normal' },
-    { feature: 'Air Conditioning', included: 'Not Included' },
-    { feature: 'Lighting', included: 'Not Included' },
-    { feature: 'Wallpaper', included: 'Not Included' },
-    { feature: 'Compulsory Decorations', included: 'PVC (Additional)' },
-    { feature: 'Wood Units', included: 'Not Included' },
-    { feature: 'Electronic Devices', included: 'Not Included' },
-    { feature: 'Furniture', included: 'Chinese Walnut and Beech (Additional)' },
-    { feature: 'Curtains', included: 'Not Included' },
-    { feature: 'Wooden Curtains', included: 'Additional' },
-    { feature: 'Chandeliers', included: 'Not Included' },
-    { feature: 'Floor Lighting', included: 'Not Included' },
-    { feature: 'Kitchen', included: 'Stainless Steel (Additional)' },
-    { feature: 'Refrigerator', included: 'Additional (Economic Size)' },
-    { feature: 'Ovens and Exhausts', included: 'Ready' },
-    { feature: 'Master Bedroom', included: 'Ready' },
-    { feature: 'Double Bedroom Connected', included: 'Ready' },
-    { feature: 'Children\'s Room', included: 'Ready' },
-    { feature: 'Accessories and Upholstery', included: 'Ready' },
-    { feature: 'Tables and Cushions', included: 'Simple Sizes' },
-    { feature: 'Gardens and Shelves', included: 'Simple Wooden or Glass Table with Sofa and Smoking (Additional)' },
-    { feature: 'The Kitchen', included: 'Included' },
-    { feature: 'Smart Home', included: 'Additional' },
+    { feature: 'Interior Design', included: 'Designed from catalog suggestions' },
+    { feature: 'Labor', included: 'Standard' },
+    { feature: 'Sink Basins', included: 'Ready porcelain and cabinet - Classification (D)' },
+    { feature: 'Chairs and Showers', included: 'Colored - Classification (D)' },
+    { feature: 'Marble or Stone Substitute', included: 'Out of budget' },
+    { feature: 'Ceramic', included: 'Not compliant' },
+    { feature: 'Porcelain', included: 'Included at maximum level' },
+    { feature: 'Marble', included: 'Not compliant' },
+    { feature: 'Wall Niches', included: 'Standard' },
+    { feature: 'Doors', included: 'Maximum WBC' },
+    { feature: 'Windows', included: 'Maximum' },
+    { feature: 'Ceilings', included: 'Gypsum board' },
+    { feature: 'Paint', included: 'Jotun Fenomastic, amazing and elegant' },
+    { feature: 'Parquet', included: 'Vinyl parquet' },
+    { feature: 'Wall Decorations', included: 'Chipboard substitute' },
+    { feature: 'Wallpaper', included: 'Standard' },
+    { feature: 'Electronic Devices', included: 'Additional/Medium' },
+    { feature: 'Artworks', included: '3D printing' },
+    { feature: 'Carpets', included: 'Dense' },
+    { feature: 'Chandeliers and Lights', included: 'Ready chandelier' },
+    { feature: 'Guest Sofa', included: 'Custom - Classification (D)' },
+    { feature: 'Closets', included: 'Custom - Classification (D)' },
+    { feature: 'Master Bedroom', included: 'Custom - Classification (D)' },
+    { feature: 'Double Bedroom', included: 'Custom - Classification (D)' },
+    { feature: 'Children’s Room', included: 'Custom - Classification (D)' },
+    { feature: 'Accessories and Ornaments', included: 'Large vases' },
+    { feature: 'Kitchens', included: 'Aluminum' },
+    { feature: 'Balcony', included: 'Lighting and cushions' },
+    { feature: 'Outdoor Patio', included: 'Tiles' },
+    { feature: 'Home Organization', included: 'Like decorating dining tables with utensils' },
+    { feature: 'Smart Home', included: 'Included at maximum level: lighting and curtains' },
   ],
 };
 
+
 const FeaturesTable = () => {
   const lang = useSelector((state) => state.lang.lang);
+  const [visibleCount, setVisibleCount] = useState(4); // الحالة لتتبع عدد الصفوف المعروضة
+
+  const handleShowMore = () => {
+    setVisibleCount((prevCount) => prevCount + 10); // زيادة عدد الصفوف عند النقر
+  };
 
   return (
-    <div className='container'
+    <div className='container-fluid mt-3'
       style={{
         margin: '20px auto',
-        padding: '20px',
-        backgroundColor: 'rgb(227 223 220)',
+        padding: '10px',
+        backgroundColor: ' #7f7967',
         borderRadius: '8px',
         boxShadow: '0px 0px 15px rgba(0, 0, 0, 0.1)',
         direction: lang === 'ar' ? 'rtl' : 'ltr',
+        width: '90%',
+        fontSize: '1em',
+        fontWeight: 'bold',
+        fontFamily:'cairo'
       }}
     >
+      <Row style={{background:'#fff0f5', marginLeft:'0.1rem', marginRight:'0.1rem', borderTopLeftRadius:'8px',
+            borderTopRightRadius:'8px'}}>
+        <div className='col-11 col-md-4' style={{
+            justifyContent: 'center',
+            alignItems: 'center',
+            display: 'flex',
+            flexDirection: 'column',
+            borderTopLeftRadius:'8px',
+            borderTopRightRadius:'8px'
+        }}>      
+          <img src={cot} alt="Cotton Image" width={'70%'} style={{margin:'1rem'}} />
+        </div>
+        <div className='col-12 col-md-8' style={{
+            justifyContent: 'center',
+            alignItems: 'center',
+            display: 'flex',
+            flexDirection: 'column'
+        }}>
+          <h3 className='text-center'style={{color:'black'}}> 
+            {lang === 'ar' ? 'باقة قطن' : 'Cotton Package'}
+          </h3>
+          <p className='text-center'>
+            <FontAwesomeIcon icon={faStar} className="star" style={{color: '#FFD700', marginRight: '5px'}} />
+            <FontAwesomeIcon icon={faStar} className="star" style={{color: '#FFD700', marginRight: '5px'}} />
+            <FontAwesomeIcon icon={faStar} className="star" style={{color: '#FFD700', marginRight: '5px'}} />
+          </p>
+          <h6 className='text-center'style={{color:'black'}}>
+            {lang === 'ar' ? 'تصاميم مريحة ومواد دافئة مع حيل حياتية لإسهام في جو منزلي مع التركيز على التشطيب الرائع' : 'Thoughtful designs, cozy materials, and life hacks for a homely feel, all with impeccable finishing'}
+          </h6>
+        </div>   
+      </Row>
+
       <table
         style={{
           width: '100%',
-          borderCollapse: 'collapse',
+          borderCollapse:"separate",
         }}
       >
         <thead>
@@ -95,27 +140,27 @@ const FeaturesTable = () => {
             <th
               style={{
                 padding: '12px 15px',
-                textAlign: 'center', // توسيط النص أفقيًا
-                verticalAlign: 'middle', // توسيط النص عموديًا
+                textAlign: 'center',
+                verticalAlign: 'middle',
                 borderBottom: '1px solid #ddd',
-                backgroundColor: '#765f52',
-                color: 'white',
+                backgroundColor: '#E3DFDC',
+                color: '#000000',
                 fontWeight: 'bold',
-                borderRadius: lang === 'ar' ? '0px 8px 8px 0px' : '8px 0px 0px 8px', // تغيير border-radius بناءً على اللغة
+                fontSize: '16px',
               }}
             >
-              {lang === 'ar' ? 'المنتجات' : 'Products'}
+              {lang === 'ar' ? 'العنصر' : 'Feature'}
             </th>
             <th
               style={{
                 padding: '12px 15px',
-                textAlign: 'center', // توسيط النص أفقيًا
-                verticalAlign: 'middle', // توسيط النص عموديًا
+                textAlign: 'center',
+                verticalAlign: 'middle',
                 borderBottom: '1px solid #ddd',
-                backgroundColor: '#765f52',
-                color: 'white',
+                backgroundColor: '#E3DFDC',
+                color: '#000000',
                 fontWeight: 'bold',
-                borderRadius: lang === 'ar' ? '8px 0px 0px 8px' : '0px 8px 8px 0px', // تغيير border-radius بناءً على اللغة
+                fontSize: '16px',
               }}
             >
               {lang === 'ar' ? 'يشمل' : 'Included'}
@@ -123,29 +168,31 @@ const FeaturesTable = () => {
           </tr>
         </thead>
         <tbody>
-          {features[lang].map((feature, index) => (
+          {features[lang].slice(0, visibleCount).map((feature, index) => (
             <tr
               key={index}
               style={{
-                backgroundColor: index % 2 === 0 ? '#f2f2f2' : 'transparent',
+                backgroundColor: index % 2 === 0 ? '#FFFFFF' : '#F2F2F2',
                 borderBottom: '1px solid #ddd',
                 cursor: 'pointer',
               }}
             >
               <td
                 style={{
-                  textAlign: 'center', // توسيط النص أفقيًا
-                  verticalAlign: 'middle', // توسيط النص عموديًا
-                  borderRadius: lang === 'ar' ? '0px 8px 8px 0px' : '8px 0px 0px 8px', // تغيير border-radius بناءً على اللغة
+                  textAlign: 'center',
+                  verticalAlign: 'middle',
+                  padding: '10px',
+                  color: '#4A4A4A',
                 }}
               >
                 {feature.feature}
               </td>
               <td
                 style={{
-                  textAlign: 'center', // توسيط النص أفقيًا
-                  verticalAlign: 'middle', // توسيط النص عموديًا
-                  borderRadius: lang === 'ar' ? '8px 0px 0px 8px' : '0px 8px 8px 0px', // تغيير border-radius بناءً على اللغة
+                  textAlign: 'center',
+                  verticalAlign: 'middle',
+                  padding: '10px',
+                  color: '#4A4A4A',
                 }}
               >
                 {feature.included}
@@ -154,6 +201,25 @@ const FeaturesTable = () => {
           ))}
         </tbody>
       </table>
+
+      {visibleCount < features[lang].length && (
+        <div style={{ textAlign: 'center', marginTop: '10px' }}>
+          <button
+            onClick={handleShowMore}
+            style={{
+              padding: '10px 20px',
+              backgroundColor: '#E3DFDC',
+              color: 'black',
+              border: 'none',
+              borderRadius: '5px',
+              cursor: 'pointer',
+              fontSize: '16px',
+            }}
+          >
+            {lang === 'ar' ? 'المزيد' : 'Show More'}
+          </button>
+        </div>
+      )}
     </div>
   );
 };

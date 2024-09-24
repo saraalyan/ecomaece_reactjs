@@ -1,16 +1,14 @@
 import React from 'react';
-import { Carousel, Container, Row, Col } from 'react-bootstrap';
-import logo from '../../assests/images/logo1.png';
-import Radium, { StyleRoot, keyframes } from 'radium';
-import { useInView } from 'react-intersection-observer';
+import Radium, {  keyframes } from 'radium';
 import Slider from './slider';
-import Footer from '../../component/portofolio/footer';
 import ServicesSection from './service';
 import CustomComponent from './section2';
 import DesignComponent from './section3';
 import ServicesComponent from './section4';
 import CustomComponent1 from './section5';
-import WhatsAppIcon from '../../component/portofolio/whats';
+import PartnersSection from './partener';
+import MetalWork from './dd';
+import { Helmet } from "react-helmet";
 import { useSelector } from 'react-redux';
 
 // Define keyframes for Radium
@@ -41,46 +39,29 @@ const styles = {
   }
 };
 
-// Custom hook to handle useInView logic
-const useFeatureInView = (threshold = 1) => {
-  const { ref, inView } = useInView({ triggerOnce: false, threshold });
-  return { ref, inView };
-};
-
 const Home = () => {
-  const isRTL = true;
-
-  const feature1 = useFeatureInView();
-  const feature2 = useFeatureInView();
-  const feature3 = useFeatureInView();
-  const feature4 = useFeatureInView();
-  const feature5 = useFeatureInView();
-  const feature6 = useFeatureInView();
-  const feature7 = useFeatureInView();
-  const feature8 = useFeatureInView();
-  const feature9 = useFeatureInView();
-  const feature10 = useFeatureInView();
-  const isDarkMode = useSelector((state) => state.darkMode.darkMode);
-
-  const footerStyle = {
-    background: isDarkMode ? '#1e2120' : '#7f7967',
-    color: isDarkMode ? '#ffffff' : '#000000',
-  };
+  const lang = useSelector ((state) => state.lang.lang); 
 
   return (
-      <div  style={{ paddingTop: '5rem', height: '100vh',...footerStyle }}>
+      <div className='' style={{ paddingTop: '4rem',  }}>
+
+<Helmet>
+    <title>{lang === 'ar' ? 'modernhomes شركه الابيات المواكبة' : 'modernhomes main page'}</title>
+    <meta name="description" content={lang === 'ar' ? 'صفحة الاتصال الخاصة بشركه الابيات المواكبة modernhomes,شركة الأبيات المواكبة Modern Homes هي شريكك المثالي في تحويل منزلك إلى مساحة معيشية تعكس ذوقك الراقي. نحن متخصصون في الترميم والتشطيب الاحترافي لكامل منزلك، بما في ذلك دورات المياه والمطابخ والأثاث والديكورات. نقدم حلولاً متكاملة تضمن الراحة والسهولة للعميل، مع الالتزام بتقديم أسعار تنافسية تلبي احتياجاتك. دعنا نحقق لك رؤية المنزل الذي تحلم به، مع ضمان الجودة والراحة في كل خطوة.' : 'Our contact page for inquiries and support,Modern Homes is your ideal partner in transforming your house into a living space that reflects your refined taste. We specialize in the complete renovation and professional finishing of your entire home, including bathrooms, kitchens, furniture, and decor. We offer comprehensive solutions that ensure comfort and ease for our clients, while maintaining competitive prices to meet your needs. Let us bring your dream home vision to life, with a guarantee of quality and comfort every step of the way.'} />
+    <meta name="keywords" content={lang === 'ar' ? 'اتصال, دعم, مبيعات, تجديد, تصليح, ترميم, تصميم داخلي, مقاول, تشطيب, مكتب تصاميم, ديزاين, تنظيم, تنفيذ, راحة, تنسيق, اثاث, كنب, غرفة نوم, غرفة العاب, زواج, فن, رسم, ابداع, اجهزة كهربائية, تعطير, باقه البيت المخملي, باقه النخبه, الباقه الفريده, الباقات, باقة قطن, باقه اسمارت, الباقه الذكية, استشاره مجانيه, اعمالنا, خدمات نقدمها, تصميم اسلوب حياة, تنظيم المنزل, تنفيذ مشاريع, تسليم مفتاح, باقات مناسبة للكل, بيوت ذكية, حلول ذكية, ضمانات, توفير الراحة' 
+: 'contact, support, sales, renovation, repair, restoration, interior design, contractor, finishing, design office, design, organization, implementation, comfort, coordination, furniture, sofa, bedroom, playroom, wedding, art, drawing, creativity, electrical appliances, scenting, velvet home package, elite package, unique package, packages, cotton package, smart package, modern package, free consultation, our work, services we offer, life style design, home organization, project execution, turnkey delivery, packages suitable for everyone, smart homes, smart solutions, guarantees, providing comfort, clear pricing and static plan, bad module, no specific price (ask for more), client choose the service he needs, client choose the designs from the packages, client choose how many rooms, bathrooms, and kitchens he has in his house, client insert his house dimensions and how many floors by square meter, client insert his contact number or social media or emails, client choose the right time & date for calls or visits'} />
+    </Helmet>
         <Slider />
         <CustomComponent/>
         <DesignComponent/>
-        <ServicesComponent/>
+    
         <ServicesSection/>
         <CustomComponent1/>
-
-       
-        <Footer/>
-        <WhatsAppIcon/>
+        <ServicesComponent/>
+        <PartnersSection/>
       </div>
-  );
+
+);
 };
 
 export default Radium(Home);

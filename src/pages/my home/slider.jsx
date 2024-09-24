@@ -1,10 +1,10 @@
 import React from 'react';
 import Radium, { StyleRoot, keyframes } from 'radium';
 import { Carousel, Col, Container } from 'react-bootstrap';
-import cityProfileImage from '../../assests/images/1.png';
-import cityProfileImage1 from '../../assests/images/2.png';
-import cityProfileImage2 from '../../assests/images/3.png';
-import cityProfileImage3 from '../../assests/images/4.png'; // الشريحة الرابعة الجديدة
+import cityProfileImage from '../../assests/images/a/1.jpg';
+import cityProfileImage1 from '../../assests/images/a/2.jpg';
+import cityProfileImage2 from '../../assests/images/a/3.jpg';
+import cityProfileImage3 from '../../assests/images/a/4.jpg';
 
 const fadeInUp = keyframes`
   from {
@@ -26,11 +26,11 @@ const styles = {
 function Slider() {
   return (
     <StyleRoot>
-      <Carousel id="carouselId" interval={2000}>
+      <Carousel id="carouselId" interval={2000} className=''>
         <Carousel.Item>
-          <img src={cityProfileImage}  className="d-block w-100" alt="First slide" />
+          <img src={cityProfileImage}  className="d-block w-100" style={{borderRadius:'30px'}} alt="First slide" />
           <Carousel.Caption>
-            <div className="container py-4">
+            <div className="container ">
               <div className="row g-5">
                 <Col lg={6} style={styles.fadeIn}>
             
@@ -43,7 +43,7 @@ function Slider() {
           </Carousel.Caption>
         </Carousel.Item>
         <Carousel.Item>
-          <img src={cityProfileImage1}  className="d-block w-100" alt="Second slide" />
+          <img src={cityProfileImage1} style={{borderRadius:'30px'}}  className="d-block w-100" alt="Second slide" />
           <Carousel.Caption>
             <div className="container py-4">
               <div className="row g-5">
@@ -58,7 +58,7 @@ function Slider() {
           </Carousel.Caption>
         </Carousel.Item>
         <Carousel.Item>
-          <img src={cityProfileImage2} className="d-block w-100" alt="Third slide" />
+          <img src={cityProfileImage2} className="d-block w-100" style={{borderRadius:'30px'}} alt="Third slide" />
           <Carousel.Caption>
             <div className="container py-4">
               <div className="row g-5">
@@ -73,7 +73,7 @@ function Slider() {
           </Carousel.Caption>
         </Carousel.Item>
         <Carousel.Item>
-          <img src={cityProfileImage3} className="d-block w-100" alt="Fourth slide" />
+          <img src={cityProfileImage3} className="d-block w-100"style={{borderRadius:'30px'}}  alt="Fourth slide" />
           <Carousel.Caption>
             <div className="container py-4">
               <div className="row g-5">

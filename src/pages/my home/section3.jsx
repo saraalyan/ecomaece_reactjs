@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { useSelector } from 'react-redux';
-import im1 from '../../assests/images/Untitled design (53).png';
-import im2 from '../../assests/images/Untitled design (54).png';
+import { Link } from 'react-router-dom'; // استخدام Link للتنقل
+import im1 from '../../assests/images/Untitled (720 x 500 px) (1).png';
 
 const DesignComponent = () => {
   const lang = useSelector((state) => state.lang.lang);
@@ -44,51 +44,36 @@ const DesignComponent = () => {
   return (
     <div
       ref={containerRef}
-      className="design-container fade-in"
+      className="container design-container fade-in"
       style={{
         display: "flex",
         flexDirection: "row",
-        alignItems: "flex-start",
+        alignItems: "flex-center",
         padding: "20px",
         backgroundColor: "var(--background-color-light)",
         flexWrap: "wrap",
-        paddingTop: '7rem',
       }}
     >
-      <div
+      <div className="col-12 col-lg-6"
         style={{
           display: "flex",
           flexDirection: "row",
-          alignItems: "flex-start",
+          alignItems: "flex-center",
           position: "relative",
           width: "100%",
           maxWidth: "600px",
         }}
       >
         <img
-          src={im2}
-          alt="Elegant Bathroom"
-          style={{
-            width: "40%",
-            height: "auto",
-            borderRadius: "10px",
-            marginRight: "20px",
-          }}
-        />
-        <img
           src={im1}
           alt="Modern Living Room"
           style={{
-            width: "50%",
+            width: "100%",
             height: "auto",
-            borderRadius: "10px",
-            marginTop: "-20%",
-            position: 'relative',
-            zIndex: 1,
           }}
         />
       </div>
-      <div className="text-container" style={{ color: "var(--text-color-light)" }}>
+      <div className="text-container d-flex align-items-center col-12 col-lg-6 " style={{ color: "var(--text-color-light)",flexDirection:'column',justifyContent:'center' }}>
         <p className={lang === 'en' ? "english-text" : "arabic-text"} style={{ color: "var(--text-color-light)" }}>
           {lang === 'en'
             ? (
@@ -107,7 +92,13 @@ const DesignComponent = () => {
             )
           }
         </p>
+        <Link to="/designs" style={{ textDecoration: 'none' }}>
+        <button className="btn btn-primary" style={{ marginTop: "20px"  ,backgroundColor:'rgb(90, 89, 88)',border:'none'}}>
+          {lang === 'en' ? "View Designs" : "عرض التصاميم"}
+        </button>
+      </Link>
       </div>
+     
     </div>
   );
 };

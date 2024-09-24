@@ -1,0 +1,272 @@
+/* General Form Styling */
+.form-light-mode {
+    background-color: #f9f9f9;
+    padding: 30px;
+    border-radius: 30px;
+    max-width: 1100px;
+    margin: auto;
+    margin-top: 1rem;
+    font-family: cairo;
+  }
+  
+  .form-dark-mode {
+    background-color: #333;
+    color: white;
+    padding: 30px;
+    border-radius: 30px;
+    max-width: 1100px;
+    margin: auto;
+    margin-top: 1rem;
+    font-family: cairo;
+
+  }
+  
+  .form-light-mode, .form-dark-mode {
+    direction: ltr; 
+  }
+  
+  .form-rtl {
+    direction: rtl;
+  }
+  
+  /* Title Styling */
+  .form-title {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  .form-dark-mode .form-title {
+    color: #f5f5f5;
+  }
+  
+  /* Flexbox Container for Name, Email, Phone */
+  .form-grid-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px; /* المسافة بين الحقول */
+  }
+  
+  .form-grid-row .form-label {
+    flex: 1;
+  }
+  
+  /* Label Styling */
+  .form-label {
+    font-size: 1rem;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+  }
+  
+  .form-dark-mode .form-label {
+    color: #f5f5f5;
+  }
+  
+  /* Input Styling */
+  .form-input, .form-textarea, .form-select {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-top: 5px;
+    color: #333;
+    background-color: #eaeaea;
+  }
+  
+  .form-dark-mode .form-input, .form-dark-mode .form-textarea, .form-dark-mode .form-select {
+    background-color: #444!important;
+    color: white;
+    border-color: #555;
+  }
+  
+  .form-input:focus, .form-textarea:focus, .form-select:focus {
+    border-color: #d16e45;
+    outline: none;
+  }
+  
+  .form-dark-mode .form-input:focus, .form-dark-mode .form-textarea:focus, .form-dark-mode .form-select:focus {
+    border-color: #c85a2b;
+  }
+  
+  /* Button Styling */
+  .form-button {
+    background-color: #7f7967;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 30px;
+    cursor: pointer;
+    margin: 0 auto;
+    display: block;
+    width: 40%;
+    margin-top: 20px;
+    text-align: center;
+  }
+  
+  .form-dark-mode .form-button {
+    background-color: #7f7967;
+  }
+  
+  .form-button:hover {
+    background-color: #7f7967;
+  }
+  
+  .form-dark-mode .form-button:hover {
+    background-color: #7f7967;
+  }
+  
+  /* Media Queries for Responsive Design */
+  @media (max-width: 768px) {
+    .form-grid-row {
+      flex-direction: column;
+    }
+  }
+  
+/* القاعدة العامة للـ select */
+.form-select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background: url("data:image/svg+xml,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 16 16%27%3e%3cpath fill=%27none%27 stroke=%27%23343a40%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27 stroke-width=%272%27 d=%27m2 5 6 6 6-6%27/%3e%3c/svg%3e") no-repeat right 10px center;
+    padding-right: 30px; /* مساحة للسهم على اليمين */
+    background-color: #eaeaea;
+    background-size: 12px; /* حجم السهم */
+
+    border-radius: 4px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    margin-top: 5px;
+    color: #333;
+  }
+  
+  /* إذا كان النص RTL (مثل العربية) */
+  .form-rtl .form-select {
+    background: url("data:image/svg+xml,%3csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 16 16%27%3e%3cpath fill=%27none%27 stroke=%27%23343a40%27 stroke-linecap=%27round%27 stroke-linejoin=%27round%27 stroke-width=%272%27 d=%27m2 5 6 6 6-6%27/%3e%3c/svg%3e") no-repeat left 10px center;
+    background-size: 12px; /* حجم السهم */
+
+    padding-left: 30px; /* مساحة للسهم على اليسار */
+    padding-right: 10px; /* تعديل الحشو الأيمن */
+    text-align: right; /* محاذاة النص لليمين */
+  }
+  /* Modern and organized styles for email descriptions */
+.email-descriptions {
+    margin-bottom: 1em;
+    padding: 1em;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .email-descriptions.dark-mode {
+    background-color: #333;
+    color: #fff;
+  }
+  
+  .email-descriptions.light-mode {
+    background-color: #ffffff;
+    color: #333;
+  }
+  
+  .email-descriptions h3 {
+    margin-bottom: 0.5em;
+  }
+  
+  .email-descriptions ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .email-descriptions li {
+    margin-bottom: 0.5em;
+  }
+  
+  .email-descriptions strong {
+    display: block;
+    margin-bottom: 0.25em;
+  }
+  
+  /* Success message styling */
+  .form-success-message {
+    margin-top: 1em;
+    padding: 1em;
+    border-radius: 4px;
+    background-color: #d4edda;
+    color: #155724;
+    text-align: center;
+    opacity: 1;
+    transition: opacity 1s ease-out;
+  }
+  
+  .form-success-message.hide {
+    opacity: 0;
+  }
+  
+  /* Modern and organized styles for email descriptions */
+.email-descriptions {
+    margin-bottom: 1em;
+    padding: 1em;
+    border-radius: 8px;
+  }
+  
+  .email-descriptions.dark-mode {
+    color: #f0f0f0;
+  }
+  
+  .email-descriptions.light-mode {
+    background-color: #ffffff;
+    color: #333333;
+  }
+  
+  .email-descriptions h3 {
+    margin-bottom: 1em;
+    font-size: 1.5em;
+    font-weight: bold;
+  }
+  
+  .email-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2em;
+  }
+  
+  .email-card {
+    flex: 1 1 calc(33.333% - 1em); 
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 1em;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  
+  .email-card h4 {
+    margin-bottom: 0.5em;
+    font-size: 1em;
+    font-weight: bold;
+  }
+  
+  .email-card p {
+    font-size: .75em;
+    color: #766155; 
+    word-break: break-all; 
+  }
+  
+  .email-card:hover {
+    transform: scale(1.02);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  }
+  
+  @media (max-width: 768px) {
+    .email-card {
+      flex: 1 1 100%;
+    }
+  }
+  .email-cards-container{display: flex; justify-content: center; align-items: center; flex-wrap: wrap;}
+  .email-card {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}.form-rtl .form-select {
+    background-color: #eaeaea;
+
+  }

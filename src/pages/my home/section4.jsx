@@ -1,7 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
-import im1 from '../../assests/images/Untitled design (49).png';
-import im2 from '../../assests/images/Untitled design (50).png';
+import im1 from '../../assests/images/Modern House (1).png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import './sev.css';
@@ -33,6 +32,9 @@ const ServicesComponent = () => {
     { en: "INTERIOR AND EXTERIOR DOORS", ar: "أبواب داخلية وخارجية" },
     { en: "ALUMINUM WORKS", ar: "أعمال الألومنيوم" },
     { en: "ELECTRONIC DEVICES", ar: "أجهزة إلكترونية" },
+    { en: "organizing the house", ar: " تنظيم المنزل" },
+
+
   ];
 
   const colors = ['#d5d0c7', '#c8b199', '#b1cbc2', '#9f8278'];
@@ -88,7 +90,7 @@ const ServicesComponent = () => {
   }, [lang]);
 
   return (
-    <div style={{ ...styles.container, backgroundColor: isDarkMode ? '#1e2120' : '#f5f5f5' }}>
+    <div className='container' style={{ ...styles.container, backgroundColor: isDarkMode ? '#1e2120' : '#f5f5f5' }}>
       <div className="col-12 col-lg-6" style={styles.leftColumn}>
         <div style={styles.imageContainer} ref={imageRef}>
           <img
@@ -97,21 +99,7 @@ const ServicesComponent = () => {
             alt="Workers"
             style={styles.image}
           />
-          <div className='d-flex'>
-            <div style={styles.colorPalette}>
-              <div style={{ ...styles.colorBox, backgroundColor: '#d5d0c7' }} />
-              <div style={{ ...styles.colorBox, backgroundColor: '#5e4b4b' }} />
-              <div style={{ ...styles.colorBox, backgroundColor: '#c8b199' }} />
-              <div style={{ ...styles.colorBox, backgroundColor: '#b1cbc2' }} />
-              <div style={{ ...styles.colorBox, backgroundColor: '#9f8278' }} />
-            </div>
-            <img
-              className='im2'
-              src={im2}
-              alt="Staircase"
-              style={styles.imageSmall}
-            />
-          </div>
+          
         </div>
       </div>
       <div className="col-12 col-lg-6" style={styles.rightColumn}>
@@ -165,19 +153,12 @@ const styles = {
     alignItems: 'center',
   },
   image: {
-    width: '55%',
+    width: '90%',
     height: 'auto',
-    marginBottom: '10px',
-    borderRadius: '5px',
+
     transition: 'transform 0.3s ease',
   },
-  imageSmall: {
-    width: '50%',
-    height: 'auto',
-    marginLeft: '10px',
-    borderRadius: '5px',
-    transition: 'transform 0.3s ease',
-  },
+
   colorPalette: {
     display: 'flex',
     flexDirection: 'column',
@@ -206,8 +187,10 @@ const styles = {
     borderRadius: '5px',
     display: 'flex',
     alignItems: 'center',
-    fontSize: '16px',
+    fontSize: '1em',
     fontWeight: 'bold',
+    fontFamily:'cairo'
+  
   },
   icon: {
     color: 'green',

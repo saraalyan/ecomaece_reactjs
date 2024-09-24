@@ -27,6 +27,7 @@
 .service-icon img {
     width: 80px; /* حجم الأيقونة */
     height: 80px; /* حجم الأيقونة */
+    padding: .25rem;
 }
 
 /* الصورة الثانية التي سيتم تطبيق تأثير الزوم عليها */
@@ -54,7 +55,7 @@
   }
   
   .main-image img {
-    width: 100%; /* حجم الصورة الكبيرة */
+    width: 90%; 
     max-width: 800px;
     cursor: pointer;
   }
@@ -171,7 +172,8 @@
   
   
   .main-image {
-    width: 80%;
+    margin: 1rem;
+    width: 100%;
     height: auto;
     display: block;
   }

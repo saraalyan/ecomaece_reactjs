@@ -41,20 +41,20 @@ const CustomComponent1 = () => {
   return (
     <div
       ref={containerRef}
-      className="custom-container  fade-in"
+      className="custom-container  container fade-in"
       style={{
         ...footerStyle,
-        padding: '20px',
+                padding: '20px',
         backgroundColor: 'var(--padding-color-light)' 
+        ,fontSize: '1em',
+        fontFamily:'cairo'
       }}
     >
       <div className="image-container d-flex justify-content-center">
         <img src={im} alt="Interior Design" className="main-image" />
       </div>
       <div className="text-container">
-        <h3 className='pb-2 text-center'>
-          {lang === 'en' ? 'Our main services include' : 'خدماتنا الرئيسيه تشمل'}
-        </h3>
+        
         <p className={lang === 'en' ? "english-text" : "arabic-text"}>
           {lang === 'en'
             ? 'Because we believed in our vision to be the first choice for customers in our field'

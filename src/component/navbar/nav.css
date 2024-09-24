@@ -1,6 +1,10 @@
 /* الوضع الافتراضي (وضع النهار) */
+.navbar {
+
+  background: #e3dfdc;
+}
 .navbar-custom {
-  background-color: #7f7967;
+  background-color: #e3dfdc;
   color: #000000;
 }
 
@@ -19,7 +23,7 @@
 }
 
 .navbar-dark-mode .nav-link {
-  color: #ffffff;
+  color: #ffffff !important;
 }
 
 .navbar-dark-mode .navbar-brand img {
@@ -29,4 +33,24 @@
 .btn-outline-light {
   color: #ffffff;
   border-color: #ffffff;
+}
+.navbar-nav .nav-link {
+  color: rgba(0, 0, 0, .55);
+  font-size:medium;
+}
+
+
+.navbar {
+
+  --bs-navbar-padding-y: 0.1rem;
+border-bottom-left-radius: 30px ;
+border-bottom-right-radius: 30px;
+}
+.navbar-light .navbar-nav .nav-link:focus, .navbar-light .navbar-nav .nav-link:hover {
+  color: #766155;
+}
+.navbar-light {
+
+  color: #766155;
+
 }
